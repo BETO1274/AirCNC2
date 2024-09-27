@@ -1,55 +1,10 @@
-
 <div class="header">
-  <nav id="navBar">
-      <a href="index.html"><img src="../assets/logo.png" alt="" class="logo"></a>
-      <ul class="nav-links">
 
-          <li><a href="popularplaces.html"> Lugares populares</a></li>
-          <li><a href="internationaltravel.html"> Viaja al exterior</a></li>
-          <li><a href="onlinepackages.html"> Paquetes en linea</a></li>
-
-      </ul>
-      <a 
-      
-       href="../HTML/login.html" class="login-btn"> Iniciar sesion</a>
-      <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
-      <a href="estate.html"><i class="fa-solid fa-hotel"></i></a>
-      <a href="profile.html"><i class="fa-solid fa-user"></i></a>
-      
-
-
-  </nav>
-  <div class="container">
-      <h1>Encuentra tu próxima estancia</h1>
-
-      <div class="search-bar">
-
-          <form>
-              <div class="location-input">
-                  <label>Dónde</label>
-                  <input type="text" placeholder="Explora destinos">
-              </div>
-              <div>
-                  <label>Llegada</label>
-                  <input type="text" placeholder="Agrega Fecha">
-              </div>
-
-              <div>
-                  <label>Salida</label>
-                  <input type="text" placeholder="Agrega fecha">
-              </div>
-
-              <div>
-                  <label>Quien</label>
-                  <input type="text" placeholder="¿Cuantos?">
-              </div>
-              <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-          </form>
-      </div>
-  </div>
-
-
+    <app-navbar></app-navbar>
+  <app-searchbar></app-searchbar>
+  
 </div>
+
 <div class="container">
   <h2 class="sub-title">Exclusivas</h2>
   <div class="exclusives">
@@ -138,15 +93,8 @@
 
   </div>
 
-  <div class="footer">
-      <a href="www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
-      <a href="www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
-      <a href="www.youtube.com"><i class="fa-brands fa-youtube"></i></a>
-      <a href="www.twitter.com"><i class="fa-brands fa-twitter"></i></a>
-      <hr>
-      <p>Copyright © 2024 AirCNN</p>
-  </div>
 
+<app-footer></app-footer>
 
 
 </div>

@@ -1,5 +1,5 @@
 <nav id="navBar">
-    <a href="index.html"><img src="../assets/logo.png" alt="" class="logo"></a>
+    <a [routerLink]="['/home']"><img src="../assets/logo.png" alt="" class="logo"></a>
     <ul class="nav-links">
 
         <li><a href="popularplaces.html"> Lugares populares</a></li>
@@ -7,11 +7,9 @@
         <li><a href="onlinepackages.html"> Paquetes en linea</a></li>
 
     </ul>
-    <a 
-    
-     href="../HTML/login.html" class="login-btn"> Iniciar sesion</a>
+    <a [routerLink]="['/login']" class="login-btn"> Iniciar sesion</a>
     <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
-    <a href="estate.html"><i class="fa-solid fa-hotel"></i></a>
-    <a href="profile.html"><i class="fa-solid fa-user"></i></a>
+    <a [routerLink]="['/estates']"><i class="fa-solid fa-hotel"></i></a>
+    <a [routerLink]="['/profile']"><i class="fa-solid fa-user"></i></a>
     
 </nav>

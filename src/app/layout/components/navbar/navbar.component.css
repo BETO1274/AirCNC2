@@ -1,0 +1,44 @@
+nav {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 7%;
+    background: black;
+    margin-bottom: 0;
+}
+
+.logo { 
+    width: 140px;
+    cursor: pointer;
+}
+
+.nav-links li {
+    list-style: none;
+    display: inline-block;
+    margin: 10px 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.fa-solid{
+color:#fff;
+}
+
+.fa-hotel{
+    font-size: 30px;
+    margin-top: 3px;
+}
+
+.fa-user{
+    font-size: 25px;
+    margin-top: 3px;
+}
+
+.fa-magnifying-glass{
+    font-size: 26px;
+}

@@ -2,9 +2,12 @@
 <div class="login-container">
     <div class="login-box">
       <h2>AirCNC</h2>
-      <input id="username" type="text" class="input-text" placeholder="Usuario" />
-      <input id="password" type="password" class="input-text" placeholder="Contraseña" />
-      <a onclick="login()" class="login-btn">Ingresar</a>
+
+      <form [formGroup]="loginForm">
+      <input id="username" formControlName="username" type="text"  class="input-text" placeholder="Usuario" />
+      <input id="password" formControlName="password"type="password" class="input-text" placeholder="Contraseña" />
+      </form>
+      <a (click)="onlogin()" class="login-btn">Ingresar</a>
       <a [routerLink]="['/sign-up']" class="login-btn">Registrarse</a>
     </div>
   </div>

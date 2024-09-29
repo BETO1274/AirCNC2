@@ -13,4 +13,10 @@ import { SearchbarComponent } from './layout/components/searchbar/searchbar.comp
 })
 export class AppComponent {
   title = 'AirCNC2';
+
+  togglebtn() {
+    let navBar = document.getElementById("navBar");
+      navBar!.classList.toggle("hidemenu")
+    }
+    
 }

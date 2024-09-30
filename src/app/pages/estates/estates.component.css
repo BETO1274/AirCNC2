@@ -1,0 +1,82 @@
+.properties-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar todo horizontalmente */
+  }
+  
+  .property-container {
+    display: flex;
+    flex-direction: column; /* Listar propiedades verticalmente */
+    gap: 16px; /* Espacio entre tarjetas */
+    width: 100%;
+    max-width: 800px; /* Ancho máximo del contenedor */
+  }
+  
+  .property-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Colocar contenido en columna */
+  }
+  
+  .property-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .property-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 12px; /* Espacio debajo de la imagen */
+  }
+  
+  .property-details {
+    margin-bottom: 12px; /* Espacio entre detalles y acciones */
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Espacio entre botones */
+  }
+  
+  .add-property-btn {
+    background-color: #45a049;
+    position: fixed; /* Fijo en relación a la ventana */
+    bottom: 20px; /* Distancia desde la parte inferior */
+    left: 85%; /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Ajuste para centrar el label */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #000; /* Borde opcional */
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+  }
+  
+  .add-property-btn:hover {
+    background-color: #45a049;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #2196F3; /* Azul */
+  }
+  
+  .edit-btn:hover {
+    background-color: #1e88e5;
+  }
+  
+  .delete-btn {
+    background-color: #f44336; /* Rojo */
+  }
+  
+  .delete-btn:hover {
+    background-color: #e53935;
+  }
+  

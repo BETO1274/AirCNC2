@@ -1,6 +1,48 @@
-.profile{
-    margin: 40px;
-}
-.profile a {
-    margin: 20px;
-}
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Organiza el contenido en columnas */
+  }
+  
+  .profile-container {
+    flex: 1; /* Ocupa todo el espacio disponible entre el header y el footer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile {
+    max-width: 600px;
+    margin: auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .profile img {
+    max-width: 100px;
+    border-radius: 50%;
+  }
+  
+  .login-btn {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .login-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .no-user {
+    text-align: center;
+    padding: 1rem;
+  }
+  

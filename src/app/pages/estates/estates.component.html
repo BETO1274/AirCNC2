@@ -1,15 +1,30 @@
-<div *ngIf="isUserActive; else noUserTemplate" >
-    <h1>Administrador de Propiedades</h1>
-    <a (click)="addEstate()" class="login-btn">Agregar Propiedad</a>
-    <div *ngFor="let estates of estates" class="property-card">
-      <h2>{{ estates.title }}</h2>
-      <p>{{ estates.description }}</p>
-      <p>Precio por noche: ${{ estates.pricePerNight }}</p>
-      <p>Dirección: {{ estates.address }}</p>
-      <a (click)="updateEstate(estates)" class="login-btn">Editar</a>
-      <a (click)="deleteProperty(estates.id)" class="login-btn" >Eliminar</a>
+<div *ngIf="isUserActive; else noUserTemplate" class="properties-wrapper">
+  <h1>Administrador de Propiedades</h1>
+  
+  
+  <h2>Lista de Propiedades</h2>
+  <div class="property-container">
+    <div *ngFor="let estate of estates" class="property-card">
+      <img *ngIf="estate.photos.length > 0" [src]="estate.photos[0]" alt="{{ estate.title }}" class="property-image" />
+      
+      <h3>{{ estate.title }}</h3>
+      <div class="property-details">
+        <p><strong>Descripción:</strong> {{ estate.description }}</p>
+        <p><strong>Precio por noche:</strong> ${{ estate.pricePerNight }}</p>
+        <p><strong>Dirección:</strong> {{ estate.address }}</p>
+        <p><strong>Número de Habitaciones:</strong> {{ estate.bedrooms }}</p>
+        <p><strong>Número de Baños:</strong> {{ estate.bathrooms }}</p>
+        <p><strong>Capacidad Máxima:</strong> {{ estate.maxCapacity }}</p>
+      </div>
+      <div class="property-actions">
+        <a (click)="updateEstate(estate)" class="btn edit-btn">Editar</a>
+        <a (click)="deleteProperty(estate.id)" class="btn delete-btn">Eliminar</a>
+      </div>
     </div>
+    <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
   </div>
-  <ng-template #noUserTemplate>
-    <p>No hay un usuario activo. Por favor, inicia sesión para agregar propiedades.</p>
-  </ng-template>
+</div>
+
+<ng-template #noUserTemplate>
+  <p>No hay un usuario activo. Por favor, inicia sesión para administrar propiedades.</p>
+</ng-template>

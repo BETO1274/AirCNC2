@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../interfaces/user.interface';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -38,18 +39,21 @@ export class LoginComponent {
       return;
     }
     if (storedPassword) {
-      // Convertir la cadena JSON en un objeto
+      
       const userSt = JSON.parse(storedPassword);
       
     
     if (user.password !== userSt.password) {
-      alert('Verifique nombre de usuario o contraseña');
-      this.loginForm.reset()
+      Swal.fire("Verifique nombre de usuario o contraseña");
+       
       return;
     }
 
     this.auth.login(user.username)
     this.router.navigateByUrl('/home')
+  }else{
+    Swal.fire("Verifique nombre de usuario o contraseña");
+
   }
  }
 }

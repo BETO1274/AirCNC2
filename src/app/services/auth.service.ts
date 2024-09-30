@@ -26,6 +26,7 @@ export class AuthService {
       this.currentUser.username = updatedUser.username;
       this.currentUser.profilePicture = updatedUser.profilePicture;
       this.currentUser.biography = updatedUser.biography;
+      this.currentUser.email = updatedUser.email;
 
       // Guardar el usuario actualizado en localStorage
       localStorage.setItem(this.currentUser.username, JSON.stringify(this.currentUser));
@@ -48,6 +49,37 @@ export class AuthService {
     } else {
       console.error('No hay un usuario conectado.');
     }
+    }
+    updateEstate(updatedEstate: Estates): void {
+      if (this.currentUser) {
+        const index = this.currentUser.estates!.findIndex(estate => estate.id === updatedEstate.id);
+        
+        if (index !== -1) {
+          // Actualiza la propiedad en el arreglo
+          this.currentUser.estates![index] = updatedEstate;
+          localStorage.setItem(this.currentUser.username, JSON.stringify(this.currentUser));
+        } else {
+          console.error('Propiedad no encontrada');
+        }
+      } else {
+        console.error('No hay un usuario conectado.');
+      }
+    }
+
+    removeEstate(estateId: number): void {
+      if (this.currentUser) {
+        const index = this.currentUser.estates!.findIndex(estate => estate.id === estateId);
+        if (index !== -1) {
+          // Eliminar la propiedad del arreglo
+          this.currentUser.estates!.splice(index, 1);
+          localStorage.setItem(this.currentUser.username, JSON.stringify(this.currentUser));
+          console.log('Propiedad eliminada con éxito.');
+        } else {
+          console.error('Propiedad no encontrada para eliminar.');
+        }
+      } else {
+        console.error('No hay un usuario conectado.');
+      }
     }
   }
 

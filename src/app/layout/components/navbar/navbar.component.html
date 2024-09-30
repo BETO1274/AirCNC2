@@ -2,14 +2,15 @@
     <a [routerLink]="['/home']"><img src="../assets/logo.png" alt="" class="logo"></a>
     <ul class="nav-links">
 
-        <li><a href="popularplaces.html"> Lugares populares</a></li>
-        <li><a href="internationaltravel.html"> Viaja al exterior</a></li>
-        <li><a href="onlinepackages.html"> Paquetes en linea</a></li>
+        <li><a > Lugares populares</a></li>
+        <li><a > Viaja al exterior</a></li>
+        <li><a > Paquetes en linea</a></li>
 
     </ul>
     <a [routerLink]="['/login']" class="login-btn"> Iniciar sesion</a>
     <i class="fa-solid fa-bars" (click)="togglebtn()"></i>
     <a [routerLink]="['/estates']"><i class="fa-solid fa-hotel"></i></a>
     <a [routerLink]="['/profile']"><i class="fa-solid fa-user"></i></a>
-
+    <a (click)="logout()"> <i class="fa-solid fa-door-closed"></i></a>
+    
 </nav>

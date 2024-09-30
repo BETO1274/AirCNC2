@@ -71,9 +71,5 @@ export class ProfileComponent {
     }
   }
   
-
-
-
-
   
 } 

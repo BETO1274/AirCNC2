@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../interfaces/user.interface';
+import { Estates, User } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +34,20 @@ export class AuthService {
   logout(): void {
     this.currentUser = null;
   }
-}
+
+  addEstate(newEstate:Estates): void {
+    if (this.currentUser) {
+      // Asegúrate de inicializar el arreglo si está vacío
+      if (!this.currentUser.estates) {
+        this.currentUser.estates = [];
+      }
+     console.log(newEstate)
+     console.log(this.currentUser)
+     this.currentUser.estates.push(newEstate)
+      localStorage.setItem(this.currentUser.username, JSON.stringify(this.currentUser));
+    } else {
+      console.error('No hay un usuario conectado.');
+    }
+    }
+  }
+

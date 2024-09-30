@@ -1,1 +1,12 @@
-<p>estates works!</p>
+<div>
+    <h1>Administrador de Propiedades</h1>
+    <a (click)="addProperty()" class="login-btn">Agregar Propiedad</a>
+    <div *ngFor="let estates of estates" class="property-card">
+      <h2>{{ estates.title }}</h2>
+      <p>{{ estates.description }}</p>
+      <p>Precio por noche: ${{ estates.pricePerNight }}</p>
+      <p>Dirección: {{ estates.address }}</p>
+      <a >Editar</a>
+      <a>Eliminar</a>
+    </div>
+  </div>

@@ -3,6 +3,8 @@ import { REACTIVE_NODE } from '@angular/core/primitives/signals';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { log } from 'console';
+import { User } from '../../interfaces/user.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,16 +13,17 @@ import { log } from 'console';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
+
 export class SignUpComponent {
-  
+
   signUpForm = this.fb.group({
     email: [''],
-    username: ['',[Validators.required]],
-    password: ['',[Validators.required]],
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
     retypepassword: ['', [Validators.required]]
   })
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private auth:AuthService) { }
 
   validateUsername(username: string) {
 
@@ -48,7 +51,7 @@ export class SignUpComponent {
 
 
   // Función para validar la contraseña
-  validatePassword(password:string) {
+  validatePassword(password: string) {
 
 
     // Verificar longitud
@@ -89,33 +92,40 @@ export class SignUpComponent {
     return true;
   }
 
-  onRegistry() {
 
+
+  onRegistry() {
+   
     console.log(this.signUpForm.value)
     if (!this.signUpForm.valid) {
       alert('Diligencie el formulario')
       return;
     }
-    
-    
-    let username = this.signUpForm.value.username;
-    let password = this.signUpForm.value.password;
-    let retypepassword = this.signUpForm.value.retypepassword;
+
+const newUser:User={
+    username : this.signUpForm.value.username ?? '',
+    password : this.signUpForm.value.password ?? '',  
+    email: this.signUpForm.value.email ?? '',
+    estates:[],
+ }
+    let retypepassword = this.signUpForm.value.retypepassword
 
 
+    if (!this.validateUsername(newUser.username)) {
 
-    if (!this.validateUsername(username!)) {
-      
-    } else if (!this.validatePassword(password!)) {
+    } else if (!this.validatePassword(newUser.password)) {
       return;
-    } else if (retypepassword! !== password!) {
+    } else if (retypepassword! !== newUser.password) {
       alert("Las contraseñas no coinciden")
-
+      return;
     } else {
-      localStorage.setItem(username!, password!);
+
+      localStorage.setItem(newUser.username, JSON.stringify(newUser));
+      this.auth.login(newUser.username)
       this.router.navigateByUrl('/home')
       alert("Usuario registrado con exito")
     }
   }
+
 
 }

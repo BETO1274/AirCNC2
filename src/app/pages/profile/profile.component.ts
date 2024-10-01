@@ -4,6 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user.interface';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { SupabaseService } from '../../services/supabase.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ProfileComponent {
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private supabase:SupabaseService) { }
   currentUser: User | null = null;
   isUserActive: boolean = false; 
 
@@ -33,14 +35,13 @@ export class ProfileComponent {
       html: `
        <input id="email" class="swal2-input" placeholder="Email" value="${this.currentUser?.email || ''}">
         <input id="username" class="swal2-input" placeholder="Nombre de usuario" value="${this.currentUser?.username||''}">
-        <input id="profilePicture" class="swal2-input" placeholder="URL de la foto de perfil" value="${this.currentUser?.profilePicture||''}">
         <textarea id="biography" class="swal2-textarea" placeholder="Biografía">${this.currentUser?.biography||''}</textarea>
       `,
       focusConfirm: false,
       preConfirm: () => {
         return {
           username: (document.getElementById('username') as HTMLInputElement).value,
-          profilePicture: (document.getElementById('profilePicture') as HTMLInputElement).value,
+          
           biography: (document.getElementById('biography') as HTMLTextAreaElement).value,
           email:(document.getElementById('email') as HTMLTextAreaElement).value,
         };
@@ -54,7 +55,7 @@ export class ProfileComponent {
       const updatedUser: User = {
         ...this.currentUser!,
         username: formValues.username,
-        profilePicture: formValues.profilePicture,
+
         biography: formValues.biography,
         email:formValues.email,
       };
@@ -72,4 +73,25 @@ export class ProfileComponent {
       Swal.fire('¡Éxito!', 'Perfil actualizado con éxito.', 'success');
     }
   }
+
+  onUpload(event:Event){
+    let inputFile = event.target as HTMLInputElement;
+    if(!inputFile.files || inputFile.files.length <= 0){
+      return;
+    }
+    const file:File = inputFile.files[0];
+    const fileName = uuidv4();
+    const folderName = this.currentUser!.username+'/profile';
+    
+    this.supabase.upload(file, fileName, folderName);
+    const updatedUser:User = {
+      ...this.currentUser!,
+      profilePicture: 'https://ffenhqwkmshxesotaasr.supabase.co/storage/v1/object/public/AirCNC/'+folderName+'/'+fileName,
+    }; 
+    this.auth.updateUser(this.currentUser,updatedUser)
+    this.ngOnInit()
+
+  }
+
+  
 } 

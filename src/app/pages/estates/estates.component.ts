@@ -5,6 +5,8 @@ import { Estates, User } from '../../interfaces/user.interface';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { checkPrime } from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
+import { SupabaseService } from '../../services/supabase.service';
 
 @Component({
   selector: 'app-estates',
@@ -18,7 +20,7 @@ export class EstatesComponent implements OnInit {
   private lastId: number = 0; // Contador para el ID autoincrementable
   currentUser: User | null = null;
   
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,private supabase:SupabaseService) { }
   isUserActive: boolean = false;
 
   ngOnInit() {
@@ -185,6 +187,42 @@ export class EstatesComponent implements OnInit {
       }
     });
   }
+
+
+  async onUpload(event: any, estate: Estates) {
+    let inputFile = event.target as HTMLInputElement;
+    if(!inputFile.files || inputFile.files.length <= 0){
+      return;
+    }
+    const file:File = inputFile.files[0];
+    const fileName = uuidv4();
+    const folderName = this.currentUser!.username+'/estate'+estate.id;
+    
+    this.supabase.upload(file, fileName, folderName);
+
+      
+
+       
+        const userString = localStorage.getItem(this.currentUser!.username);
+        if (userString) {
+            const user: User = JSON.parse(userString);
+            
+          
+            if (!user.estates) {
+                user.estates = [];
+            }
+
+            // Actualiza la propiedad photos del estate
+            const estateIndex = user.estates.findIndex(e => e.id === estate.id);
+            if (estateIndex > -1) {
+                user.estates[estateIndex].photos.push("https://ffenhqwkmshxesotaasr.supabase.co/storage/v1/object/public/AirCNC/"+folderName+"/"+fileName);
+            }
+
+            // Guarda el objeto actualizado en Local Storage
+            localStorage.setItem(this.currentUser!.username, JSON.stringify(user));
+        }
+    }
 }
+
 
 

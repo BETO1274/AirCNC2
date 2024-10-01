@@ -300,15 +300,6 @@ nav .fa-bars {
         font-size: 28px;
         cursor: pointer;
     }
-    nav .fa-door-closed{
-        display: block;
-        position: fixed;
-        top: 3.5%;
-        right: 14%;
-        color: #fff;
-        font-size: 50px;
-        cursor: pointer;
-    }
 
     nav .fa-user{
         display: block;

@@ -79,4 +79,8 @@
   .delete-btn:hover {
     background-color: #e53935;
   }
-  
+  .no-user {
+    text-align: center;
+    padding: 1rem;
+  }
+   

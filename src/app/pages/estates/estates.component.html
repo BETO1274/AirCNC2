@@ -19,6 +19,7 @@
       <div class="property-actions">
         <a (click)="updateEstate(estate)" class="btn edit-btn">Editar</a>
         <a (click)="deleteProperty(estate.id)" class="btn delete-btn">Eliminar</a>
+        <input type="file" (change)="onUpload($event,estate)">
       </div>
     </div>
     <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>

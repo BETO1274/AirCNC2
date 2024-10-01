@@ -1,4 +1,5 @@
 export interface User{
+
 username:string,                //Nombre de uauario
 password:string,                //contraseña de usuario 
 email?:string,                  //correo electronico 

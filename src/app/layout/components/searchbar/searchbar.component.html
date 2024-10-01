@@ -1,23 +1,25 @@
 <div class="container">
     <h1>Encuentra tu próxima estancia</h1>
-
+  
     <div class="search-bar">
-
+  
         <form>
             <div class="location-input">
                 <label>Dónde</label>
-                <input type="text" placeholder="Explora destinos">
+                <select>
+                    <option value="{{item}}" *ngFor="let item of direccion; let indice = index">{{item}}</option>
+                </select>
             </div>
             <div>
                 <label>Llegada</label>
                 <input type="text" placeholder="Agrega Fecha">
             </div>
-
+  
             <div>
                 <label>Salida</label>
                 <input type="text" placeholder="Agrega fecha">
             </div>
-
+  
             <div>
                 <label>Quien</label>
                 <input type="text" placeholder="¿Cuantos?">
@@ -25,4 +27,4 @@
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
     </div>
-</div>
+  </div>

@@ -1,47 +1,100 @@
 nav {
-
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 7%;
     background: black;
-    margin-bottom: 0;
+    width: 100%;
+    top: 0;
+    z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
 }
 
-.logo { 
-    width: 140px;
-    cursor: pointer;
+.logo img {
+    width: 140px; /* Ajusta según el tamaño del logo */
+}
+
+.menu-icon {
+    display: block; /* Asegúrate de que el icono de hamburguesa sea visible */
+    color: #fff;
+    font-size: 30px;
+}
+
+/* Estilos para la lista de navegación */
+.nav-links {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-left: auto; /* Alinea el menú a la derecha */
 }
 
 .nav-links li {
     list-style: none;
-    display: inline-block;
-    margin: 10px 30px;
+    margin: 0 30px; /* Espaciado entre los elementos */
+    cursor: pointer;
 }
 
 .nav-links a {
     text-decoration: none;
     color: #fff;
-    margin-bottom: 0;
+    display: flex;
+    align-items: center; /* Alinea icono y texto */
+    position: relative; /* Para el efecto hover */
 }
 
-.fa-solid{
-color:#fff;
+.nav-links a i {
+    margin-right: 5px; /* Espaciado entre el icono y el texto */
 }
 
-.fa-hotel{
-    font-size: 30px;
-    margin-top: 3px;
-}
-.fa{
-    font-size: 30px;
-    margin-top: 3px;
-}
-.fa-user{
-    font-size: 25px;
-    margin-top: 3px;
+/* Estilos para el botón de Iniciar Sesión */
+.login-btn {
+    background: transparent; /* Sin color de fondo */
+    color: #fff; /* Color del texto */
+   
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background 0.3s, color 0.3s; /* Transición suave para el fondo y el color */
+    cursor: pointer; /* Cambia el cursor a pointer */
 }
 
-.fa-magnifying-glass{
-    font-size: 26px;
+.login-btn:hover {
+    color: #fff; /* Color del texto */
+}
+
+/* Estilos para el icono de salir en hover */
+.nav-links a:hover {
+    color: #00a1d9; /* Cambia el color al pasar el mouse */
+}
+
+.nav-links a:hover i {
+    color: #00a1d9; /* Cambia el color del icono al pasar el mouse */
+}
+
+/* Media query para dispositivos móviles */
+@media only screen and (max-width: 800px) {
+    .nav-links {
+        display: none; /* Oculta los enlaces por defecto */
+        flex-direction: column; /* Alinea verticalmente */
+        position: absolute; /* Posiciona el menú */
+        background: black; /* Fondo negro */
+        width: 250px; /* Ancho del menú lateral */
+        top: 50px; /* Ajusta según la altura del nav */
+        right: 0; /* Posiciona el menú a la derecha */
+        z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+        transition: transform 0.3s ease; /* Transición suave */
+        transform: translateX(100%); /* Inicialmente oculto a la derecha */
+    }
+
+    .nav-links.active {
+        display: flex; /* Muestra el menú cuando está activo */
+        transform: translateX(0); /* Muestra el menú */
+    }
+}
+
+/* Esconder el icono de menú (hamburguesa) cuando el ancho es mayor a 800px */
+@media (min-width: 800px) {
+    .menu-icon {
+        display: none; /* Esconde el icono cuando la pantalla es más ancha */
+    }
 }

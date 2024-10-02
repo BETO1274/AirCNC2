@@ -1,86 +1,125 @@
-.properties-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centrar todo horizontalmente */
-  }
-  
-  .property-container {
-    display: flex;
-    flex-direction: column; /* Listar propiedades verticalmente */
-    gap: 16px; /* Espacio entre tarjetas */
-    width: 100%;
-    max-width: 800px; /* Ancho máximo del contenedor */
-  }
-  
-  .property-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #f9f9f9;
-    transition: box-shadow 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column; /* Colocar contenido en columna */
-  }
-  
-  .property-card:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .property-image {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 12px; /* Espacio debajo de la imagen */
-  }
-  
-  .property-details {
-    margin-bottom: 12px; /* Espacio entre detalles y acciones */
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: 10px 15px;
-    border-radius: 4px;
-    text-decoration: none;
-    color: white;
-    transition: background-color 0.3s;
-    margin-right: 10px; /* Espacio entre botones */
-  }
-  
-  .add-property-btn {
-    background-color: #45a049;
-    position: fixed; /* Fijo en relación a la ventana */
-    bottom: 20px; /* Distancia desde la parte inferior */
-    left: 85%; /* Centrado horizontalmente */
-    transform: translateX(-50%); /* Ajuste para centrar el label */
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #000; /* Borde opcional */
-    z-index: 1000; /* Asegura que esté sobre otros elementos */
-  }
-  
-  .add-property-btn:hover {
-    background-color: #45a049;
-    cursor: pointer;
-  }
-  
-  .edit-btn {
-    background-color: #2196F3; /* Azul */
-  }
-  
-  .edit-btn:hover {
-    background-color: #1e88e5;
-  }
-  
-  .delete-btn {
-    background-color: #f44336; /* Rojo */
-  }
-  
-  .delete-btn:hover {
-    background-color: #e53935;
-  }
-  .no-user {
-    text-align: center;
-    padding: 1rem;
-  }
-   
+/* Estilo general para el contenedor del componente */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+  color: #666;
+}
+
+.add-property-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Azul */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.add-property-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* Estilos para la lista de propiedades */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+li h3 {
+  margin: 0 0 10px;
+}
+
+li p {
+  margin: 5px 0;
+}
+
+/* Estilos para los botones Editar y Eliminar */
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+}
+
+.edit-btn {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #45a049; /* Verde más oscuro */
+}
+
+.delete-btn {
+  background-color: #f44336; /* Rojo */
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #e53935; /* Rojo más oscuro */
+}
+
+/* Estilos para el mensaje de no hay propiedades disponibles */
+.no-properties {
+  text-align: center;
+  color: #999;
+}
+
+.estates-container {
+  margin-top: 100px;
+}
+
+.estate-info {
+  display: flex; /* Usar flexbox para alinear propiedades e imágenes */
+  justify-content: space-between; /* Espacio entre elementos */
+  align-items: flex-start; /* Alinear al inicio */
+  margin-bottom: 10px; /* Espacio entre cada propiedad */
+}
+
+.photo-gallery {
+  display: flex; /* Usar flexbox para alinear elementos en una fila */
+  flex-direction: row; /* Apilar imágenes en una columna */
+  margin-left: 20px; /* Espacio a la izquierda para separar del texto */
+}
+
+.estate-photo {
+  max-width: 200px; /* Ajustar el tamaño de las imágenes */
+  height: 200px; /* Permitir que la altura se ajuste automáticamente */
+  object-fit: cover; /* Asegura que las imágenes se recorten adecuadamente */
+  margin: 40px;
+  border-radius: 10%;
+}
+
+.upload-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Azul */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin: 5px;
+}
+
+.upload-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+}

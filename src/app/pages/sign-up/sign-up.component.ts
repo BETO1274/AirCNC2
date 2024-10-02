@@ -145,7 +145,7 @@ const newUser:User={
     username : this.signUpForm.value.username ?? '',
     password : this.signUpForm.value.password ?? '',  
     email: this.signUpForm.value.email ?? '',
-    estates:[],
+    
  }
     let retypepassword = this.signUpForm.value.retypepassword
 

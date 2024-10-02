@@ -33,6 +33,4 @@ currentUser: User | null = null;
       .getPublicUrl(`${folderName}/${fileName}`)      
    return data.publicUrl
   }
-
-
 }

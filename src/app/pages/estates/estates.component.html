@@ -1,31 +1,48 @@
-<div *ngIf="isUserActive; else noUserTemplate" class="properties-wrapper">
+<div class="estates-container">
   <h1>Administrador de Propiedades</h1>
-  
-  
   <h2>Lista de Propiedades</h2>
-  <div class="property-container">
-    <div *ngFor="let estate of estates" class="property-card">
-      <img *ngIf="estate.photos.length > 0" [src]="estate.photos[0]" alt="{{ estate.title }}" class="property-image" />
-      
-      <h3>{{ estate.title }}</h3>
-      <div class="property-details">
-        <p><strong>Descripción:</strong> {{ estate.description }}</p>
-        <p><strong>Precio por noche:</strong> ${{ estate.pricePerNight }}</p>
-        <p><strong>Dirección:</strong> {{ estate.address }}</p>
-        <p><strong>Número de Habitaciones:</strong> {{ estate.bedrooms }}</p>
-        <p><strong>Número de Baños:</strong> {{ estate.bathrooms }}</p>
-        <p><strong>Capacidad Máxima:</strong> {{ estate.maxCapacity }}</p>
-      </div>
-      <div class="property-actions">
-        <a (click)="updateEstate(estate)" class="btn edit-btn">Editar</a>
-        <a (click)="deleteProperty(estate.id)" class="btn delete-btn">Eliminar</a>
-        <input type="file" (change)="onUpload($event,estate)">
-      </div>
-    </div>
-    <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
-  </div>
-</div>
 
-<ng-template #noUserTemplate>
-  <p>No hay un usuario activo. Por favor, inicia sesión para administrar propiedades.</p>
-</ng-template>
+  <div *ngIf="isUserActive; else noUserTemplate">
+    <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
+
+    <div *ngIf="estates.length > 0">
+      <ul>
+        <li *ngFor="let estate of estates">
+          <div class="estate-info">
+            <div>
+              <h3>{{ estate.title }}</h3>
+              <p>{{ estate.description }}</p>
+              <p>Dirección: {{ estate.address }}</p>
+              <p>Precio por Noche: ${{ estate.pricePerNight }}</p>
+              <p>Número de Habitaciones: {{ estate.bedrooms }}</p>
+              <p>Número de Baños: {{ estate.bathrooms }}</p>
+              <p>Capacidad Máxima: {{ estate.maxCapacity }}</p>
+            </div>
+            <div *ngIf="estate.photos.length > 0" class="photo-gallery">
+              <div *ngFor="let photo of estate.photos">
+                <img [src]="photo" alt="{{ estate.title }}" class="estate-photo">
+              </div>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="btn edit-btn" (click)="editEstate(estate)">Editar</button>
+            <button class="btn delete-btn" (click)="deleteEstate(estate.id)">Eliminar</button>
+
+            <!-- Input de archivo oculto -->
+            <input type="file" id="file-input" (change)="onUpload($event, estate)" style="display: none;">
+            <label for="file-input" class="btn upload-btn">Subir Imagen</label>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="estates.length === 0">
+      <p>No hay propiedades disponibles.</p>
+    </div>
+  </div>
+
+  <ng-template #noUserTemplate>
+    <p>No hay un usuario activo. Por favor, inicia sesión para agregar propiedades.</p>
+  </ng-template>
+</div>

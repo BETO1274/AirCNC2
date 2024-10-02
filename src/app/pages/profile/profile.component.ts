@@ -55,7 +55,6 @@ export class ProfileComponent {
       const updatedUser: User = {
         ...this.currentUser!,
         username: formValues.username,
-
         biography: formValues.biography,
         email:formValues.email,
       };

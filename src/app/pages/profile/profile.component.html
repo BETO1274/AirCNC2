@@ -1,7 +1,7 @@
-<div class="profile" *ngIf="isUserActive; else noUserTemplate">
+
 <div class="page-container">
   <h1>Información de Usuario</h1><br>
-
+  <div class="profile" *ngIf="isUserActive; else noUserTemplate">
   <div class="profile-container">
     <img [src]="currentUser!.profilePicture" alt="Foto de Perfil">
    

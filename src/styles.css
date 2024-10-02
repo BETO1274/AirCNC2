@@ -6,14 +6,25 @@
     font-family: 'poppins', sans-serif;
 }
 
-.header {
+html, body {
+    height: 100%; /* Asegura que el body tenga el 100% de la altura */
+    margin: 0; /* Elimina márgenes */
+  }
 
-    min-height: 100vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../src/assets/banner.jpg);
-    background-size: cover;
-    background-position: center; 
-}
+  .main-container {
+    display: flex;
+    flex-direction: column; /* Coloca el contenido y el footer en columnas */
+    min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
+  }
+  
+  .content {
+    flex: 1; /* Permite que el contenido crezca y ocupe el espacio disponible */
+    padding: 20px; /* Espaciado alrededor del contenido */
+    margin: 150px;
+  }
+
+
+
 
 .header2  {
 

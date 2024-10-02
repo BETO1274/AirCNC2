@@ -1,26 +1,31 @@
 
-<div class="page-container">
-  <h1>Información de Usuario</h1><br>
-  <div class="profile" *ngIf="isUserActive; else noUserTemplate">
-  <div class="profile-container">
-    <img [src]="currentUser!.profilePicture" alt="Foto de Perfil">
    
-    <div class="profile-info">
-      <p><strong>Correo:</strong> {{ currentUser?.email }}</p>
-      <p><strong>Nombre de usuario:</strong> {{ currentUser?.username }}</p>
-      <p><strong>Biografía:</strong> {{ currentUser?.biography }}</p>
-      
-      <div>
-        <a (click)="openUpdateProfileModal()" class="login-btn">Editar Perfil</a>
-        <input type="file" (change)="onUpload($event)" >
+    <div class="profile" *ngIf="isUserActive; else noUserTemplate">
+      <h1>Información de Usuario</h1><br>
+      <div class="profile-container">
+        <img [src]="currentUser!.profilePicture" alt="Foto de Perfil">
+
+        <div class="profile-info">
+          <p><strong>Correo:</strong> {{ currentUser?.email }}</p>
+          <p><strong>Nombre de usuario:</strong> {{ currentUser?.username }}</p>
+          <p><strong>Biografía:</strong> {{ currentUser?.biography }}</p>
+
+          <div>
+            <a (click)="openUpdateProfileModal()" class="login-btn">Editar Perfil</a>
+            <input type="file" (change)="onUpload($event)">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
+ 
 
-<ng-template #noUserTemplate>
-  <div class="no-user">
-    <p>No hay un usuario activo. Por favor, inicia sesión para agregar propiedades.</p>
-  </div>
-</ng-template>
+
+
+  <ng-template #noUserTemplate>
+    <div class="no-user-container">
+      <p class="no-user-message">No hay un usuario activo.</p>
+      <p>¡Estás a un paso de comenzar tu aventura en el mundo de las propiedades! Crea tu perfil y empieza a compartir
+        tus espacios únicos.</p>
+      <a [routerLink]="['/sign-up']" class="create-profile-btn">¡Crea tu perfil aquí!</a>
+    </div>
+  </ng-template>

@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import { SupabaseService } from '../../services/supabase.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-estates',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './estates.component.html',
   styleUrls: ['./estates.component.css']
 })

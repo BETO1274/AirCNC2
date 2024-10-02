@@ -40,9 +40,35 @@ html, body {
   .login-btn:hover {
     background-color: #0056b3;
   }
-  
-  .no-user {
+  .no-user-container {
+    flex: 1;
     text-align: center;
-    padding: 1rem;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo claro */
+    border: 1px solid #ccc; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    margin: 20px; /* Margen alrededor del contenedor */
+  }
+  
+  .no-user-message {
+    font-size: 20px;
+    color: #333; /* Color del texto */
+    margin-bottom: 10px; /* Espaciado inferior */
+  }
+  
+  .create-profile-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Azul */
+    color: white; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Sin subrayado */
+    font-size: 16px; /* Tamaño del texto */
+    transition: background 0.3s; /* Transición suave para el hover */
+  }
+  
+  .create-profile-btn:hover {
+    background-color: #0056b3; /* Azul más oscuro en hover */
   }
   

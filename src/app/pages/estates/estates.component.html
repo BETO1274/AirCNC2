@@ -1,8 +1,9 @@
 <div class="estates-container">
+  <div *ngIf="isUserActive; else noUserTemplate">
   <h1>Administrador de Propiedades</h1>
   <h2>Lista de Propiedades</h2>
 
-  <div *ngIf="isUserActive; else noUserTemplate">
+  
     <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
 
     <div *ngIf="estates.length > 0">
@@ -43,6 +44,11 @@
   </div>
 
   <ng-template #noUserTemplate>
-    <p>No hay un usuario activo. Por favor, inicia sesión para agregar propiedades.</p>
+    <div class="no-user-container">
+      <p class="no-user-message">No hay un usuario activo.</p>
+      <p>Por favor, inicia sesión para agregar propiedades.</p>
+      <a [routerLink]="['/sign-up']" class="register-btn">Registrarse</a>
+    </div>
   </ng-template>
+
 </div>

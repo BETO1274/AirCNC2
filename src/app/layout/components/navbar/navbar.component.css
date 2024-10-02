@@ -1,12 +1,14 @@
 nav {
     position: fixed;
     display: flex;
+    flex-direction: row-reverse; /* Cambia esto a row para mantener el logo a la izquierda */
     align-items: center;
     justify-content: space-between;
     padding: 10px 7%;
     background: black;
     width: 100%;
     top: 0;
+    margin-bottom: 200px;
     z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
 }
 
@@ -17,7 +19,7 @@ nav {
 .menu-icon {
     display: block; /* Asegúrate de que el icono de hamburguesa sea visible */
     color: #fff;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 /* Estilos para la lista de navegación */
@@ -51,7 +53,6 @@ nav {
 .login-btn {
     background: transparent; /* Sin color de fondo */
     color: #fff; /* Color del texto */
-   
     border: none; /* Sin borde */
     border-radius: 5px; /* Bordes redondeados */
     transition: background 0.3s, color 0.3s; /* Transición suave para el fondo y el color */
@@ -79,11 +80,12 @@ nav {
         position: absolute; /* Posiciona el menú */
         background: black; /* Fondo negro */
         width: 250px; /* Ancho del menú lateral */
-        top: 50px; /* Ajusta según la altura del nav */
+        top: 200px; /* Ajusta según la altura del nav */
         right: 0; /* Posiciona el menú a la derecha */
         z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
         transition: transform 0.3s ease; /* Transición suave */
         transform: translateX(100%); /* Inicialmente oculto a la derecha */
+        margin-bottom: 200px;
     }
 
     .nav-links.active {
@@ -96,5 +98,21 @@ nav {
 @media (min-width: 800px) {
     .menu-icon {
         display: none; /* Esconde el icono cuando la pantalla es más ancha */
+        
     }
+
+    nav {
+        position: fixed;
+        display: flex;
+        flex-direction: row; /* Cambia esto a row para mantener el logo a la izquierda */
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 7%;
+        background: black;
+        width: 100%;
+        top: 0;
+        z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
+        margin-bottom: 200px;
+    }
+    
 }

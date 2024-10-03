@@ -12,7 +12,9 @@
 
           <div>
             <a (click)="openUpdateProfileModal()" class="login-btn">Editar Perfil</a>
-            <input type="file" (change)="onUpload($event)">
+            
+            <input type="file" id="file-input" (change)="onUpload($event)" style="display: none;">
+            <label for="file-input" class="btn upload-btn">Subir Imagen</label>
           </div>
         </div>
       </div>

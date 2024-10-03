@@ -1,89 +1,44 @@
-
-
-    <h2 class="sub-title">Exclusivas</h2>
-    <div class="exclusives">
-        <div>
-            <img src="../assets/london.jpg" alt="">
-            <span>
-                <h3><a href="">Londres</a></h3>
-                <p>Desde 300 Usd</p>
-            </span>
+<div class="estates-container">
+    <div *ngFor="let estate of estates" class="estate-item">
+      <div *ngIf="estate.id !== undefined" class="estate-card">
+        <h2>{{ estate.title }}</h2>
+        <div class="image-container">
+          <img *ngIf="estate.photos.length > 0" [src]="estate.photos[0]" alt="Foto de {{ estate.title }}" class="property-image" />
         </div>
-        <div>
-            <img src="../assets/amsterdam.jpg" alt="">
-            <span>
-                <h3><a href="">Amsterdam</a></h3>
-                <p>Desde 300 Usd</p>
-            </span>
-        </div>
-        <div>
-            <img src="../assets/roma.jpg" alt="">
-            <span>
-                <h3><a href="">Roma</a></h3>
-                <p>Desde 300 Usd</p>
-            </span>
-        </div>
-        <div>
-            <img src="../assets/machupichu.jpg" alt="">
-            <span>
-                <h3><a href="">Cuzco</a></h3>
-                <p>Desde 300 Usd</p>
-            </span>
-        </div>
-        <div>
-            <img src="../assets/tokyo.jpg" alt="">
-            <span>
-                <h3><a href="">Tokyo</a></h3>
-                <p>Desde 300 Usd</p>
-            </span>
-        </div>
-
-
+        <p><strong>Descripción:</strong> {{ estate.description }}</p>
+        <p><strong>Dirección:</strong> {{ estate.address }}</p>
+        <p><strong>Precio por noche:</strong> {{ estate.pricePerNight | currency }}</p>
+        <p><strong>Habitaciones:</strong> {{ estate.bedrooms }}</p>
+        <p><strong>Baños:</strong> {{ estate.bathrooms }}</p>
+        <p><strong>Capacidad máxima:</strong> {{ estate.maxCapacity }}</p>
+      </div>
     </div>
-    <h2 class="sub-title">Tendencias</h2>
-    <div class="trending">
-
-        <div>
-            <img src="../assets/murudeshwar.jpg" alt="">
-            <h3><a href="">Murudeshwar</a></h3>
-        </div>
-        <div>
-            <img src="../assets/kuala-lumpur.jpg" alt="">
-            <h3><a href="">Kuala Lumpur</a> </h3>
-        </div>
-        <div>
-            <img src="../assets/sidney.jpg" alt="">
-            <h3><a href="">Sidney</a></h3>
-        </div>
-        <div>
-            <img src="../assets/pekin.jpg" alt="">
-            <h3><a href="">Pekin</a></h3>
-        </div>
-    </div>
-
-    <div class="cta">
-        <h3>¿Listo para AirCNC? </h3>
-
-        <p>
-            ¡Publica tu espacio con nosotros y conecta con viajeros de todo el mundo!
-            <br> Es fácil y rápido. Empieza a ganar dinero hoy mismo.
-        </p>
-        <a href="" class="cta-btn">Más información</a>
-    </div>
+  </div>
 
 
-    <div class="about-msg">
-        <h2>Acerca de AirCNC</h2>
-        <p>En AirCNN, somos un sitio web emergente líder en el alquiler ocasional de inmuebles. Nos especializamos
-            en conectar propietarios con viajeros de todo el mundo que buscan experiencias únicas y memorables.
 
-            Nuestra misión es simplificar el proceso de alquiler, brindando una plataforma intuitiva y segura tanto
-            para anfitriones como para huéspedes. Con un enfoque en la calidad y la satisfacción, trabajamos para
-            que cada alquiler sea una experiencia excepcional.
+<div class="cta">
+    <h3>¿Listo para AirCNC? </h3>
 
-            Descubre cómo AirCNN puede ayudarte a maximizar el potencial de tu propiedad o encontrar el lugar
-            perfecto para tu próxima aventura. ¡Estamos aquí para hacer que cada estancia sea inolvidable!</p>
+    <p>
+        ¡Publica tu espacio con nosotros y conecta con viajeros de todo el mundo!
+        <br> Es fácil y rápido. Empieza a ganar dinero hoy mismo.
+    </p>
+    <a href="" class="cta-btn">Más información</a>
+</div>
 
 
-    </div>
+<div class="about-msg">
+    <h2>Acerca de AirCNC</h2>
+    <p>En AirCNN, somos un sitio web emergente líder en el alquiler ocasional de inmuebles. Nos especializamos
+        en conectar propietarios con viajeros de todo el mundo que buscan experiencias únicas y memorables.
 
+        Nuestra misión es simplificar el proceso de alquiler, brindando una plataforma intuitiva y segura tanto
+        para anfitriones como para huéspedes. Con un enfoque en la calidad y la satisfacción, trabajamos para
+        que cada alquiler sea una experiencia excepcional.
+
+        Descubre cómo AirCNN puede ayudarte a maximizar el potencial de tu propiedad o encontrar el lugar
+        perfecto para tu próxima aventura. ¡Estamos aquí para hacer que cada estancia sea inolvidable!</p>
+
+
+</div>

@@ -26,11 +26,15 @@ currentUser: User | null = null;
       return;
     }
 
-   
+
     const { data } = await this.supabase
       .storage
       .from("AirCNC")
       .getPublicUrl(`${folderName}/${fileName}`)      
    return data.publicUrl
+  }
+
+  delete(path: string): Promise<any> {
+    return this.supabase.storage.from('your_bucket_name').remove([path]);
   }
 }

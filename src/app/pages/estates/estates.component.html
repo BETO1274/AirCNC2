@@ -20,8 +20,9 @@
               <p>Capacidad Máxima: {{ estate.maxCapacity }}</p>
             </div>
             <div *ngIf="estate.photos.length > 0" class="photo-gallery">
-              <div *ngFor="let photo of estate.photos">
+              <div *ngFor="let photo of estate.photos;let i = index">
                 <img [src]="photo" alt="{{ estate.title }}" class="estate-photo">
+                <button (click)="deleteImage(photo, estate, i)" class="btn delete-image-btn">Eliminar Imagen</button>
               </div>
             </div>
           </div>
@@ -29,10 +30,9 @@
           <div class="button-group">
             <button class="btn edit-btn" (click)="editEstate(estate)">Editar</button>
             <button class="btn delete-btn" (click)="deleteEstate(estate.id)">Eliminar</button>
-
-            <!-- Input de archivo oculto -->
-            <input type="file" id="file-input" (change)="onUpload($event, estate)" style="display: none;">
-            <label for="file-input" class="btn upload-btn">Subir Imagen</label>
+            <input type="file" #fileInput (change)="onUpload($event, estate)" style="display: none;" />
+            <button class="btn upload-btn" (click)="fileInput.click();">Subir Imagen</button>
+            
           </div>
         </li>
       </ul>

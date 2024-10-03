@@ -88,11 +88,15 @@ li p {
   align-items: flex-start; /* Alinear al inicio */
   margin-bottom: 10px; /* Espacio entre cada propiedad */
 }
-
 .photo-gallery {
   display: flex; /* Usar flexbox para alinear elementos en una fila */
-  flex-direction: row; /* Apilar imágenes en una columna */
-  margin-left: 20px; /* Espacio a la izquierda para separar del texto */
+  flex-wrap: wrap; /* Permitir que las imágenes se ajusten en varias filas */
+  margin-left: 10px; /* Espacio a la izquierda para separar del texto */
+}
+
+.photo-gallery div {
+  margin: 10px; /* Espacio entre imágenes */
+  text-align: center; /* Centrar contenido dentro del div */
 }
 
 .estate-photo {
@@ -101,6 +105,24 @@ li p {
   object-fit: cover; /* Asegura que las imágenes se recorten adecuadamente */
   margin: 40px;
   border-radius: 10%;
+}
+
+.delete-image-btn {
+  background-color: #f44336; /* Rojo */
+  color: white;
+  padding: 5px 8px; /* Reduce el padding para hacerlo más pequeño */
+  border: none;
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 12px; /* Tamaño de fuente más pequeño */
+  cursor: pointer;
+  margin-top: 1px; /* Espaciado reducido arriba para acercarlo a la imagen */
+  transition: background-color 0.3s; /* Transición suave para el hover */
+  display: block; /* Asegura que ocupe toda la línea */
+  width: auto; /* Cambia a auto para que ajuste al contenido */
+}
+
+.delete-image-btn:hover {
+  background-color: #e53935; /* Rojo más oscuro en hover */
 }
 
 .upload-btn {

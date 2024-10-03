@@ -50,9 +50,7 @@ export class EstatesComponent implements OnInit {
         .filter(key => key.startsWith(`${this.currentUser!.username}_`))
         .map(key => JSON.parse(localStorage.getItem(key)!));
 
-        
-
-      console.log('Loaded Estates:', this.estates);
+    //  console.log('Loaded Estates:', this.estates);
     }
   }
 
@@ -222,27 +220,54 @@ export class EstatesComponent implements OnInit {
     });
   }
 
-  onUpload(event:Event,estate:Estates){
-    
-    let inputFile = event.target as HTMLInputElement;
-    if(!inputFile.files || inputFile.files.length <= 0){
+
+
+async onUpload(event: Event, estate: Estates) {
+  let inputFile = event.target as HTMLInputElement;
+  if (!inputFile.files || inputFile.files.length <= 0) {
       return;
-    }
-    const file:File = inputFile.files[0];
-    const fileName = uuidv4();
-    const folderName = this.currentUser!.username+"/estates/"+`${this.currentUser!.username}_${estate.id}`;
-    
-    this.supabase.upload(file, fileName, folderName);
-    this.photos=estate.photos
-    this.photos.push('https://ffenhqwkmshxesotaasr.supabase.co/storage/v1/object/public/AirCNC/'+folderName+'/'+fileName,)
-    
-    const newEstate:Estates = {
-     ...estate!,
-    photos:this.photos
-     }; 
+  }
 
-     localStorage.setItem(`${this.currentUser!.username}_${estate.id}`, JSON.stringify(newEstate));
-    this.ngOnInit()
+  const file: File = inputFile.files[0];
+  const fileName = uuidv4(); // Genera un nombre único
+  const folderName = `${this.currentUser!.username}/estates/${this.currentUser!.username}_${estate.id}`;
 
+  try {
+      await this.supabase.upload(file, fileName, folderName);
+      const newPhotoUrl = `https://ffenhqwkmshxesotaasr.supabase.co/storage/v1/object/public/AirCNC/${folderName}/${fileName}`;
+      
+      // Copia el estate para evitar mutaciones
+      const updatedEstate = { ...estate, photos: [...(estate.photos || []), newPhotoUrl] };
+
+      // Guarda el estate actualizado en localStorage usando el ID
+      localStorage.setItem(`${this.currentUser!.username}_${estate.id}`, JSON.stringify(updatedEstate));
+
+      // Actualiza la lista de propiedades
+      this.loadEstates();
+  } catch (error) {
+      console.error("Error al subir la imagen:", error);
+  }
 }
+
+async deleteImage(photoUrl: string, estate: Estates, index: number) {
+  // Extrae el nombre del archivo del URL
+  const fileName = photoUrl.split('/').pop(); // Obtiene el nombre del archivo
+  const folderName = `${this.currentUser!.username}/estates/${this.currentUser!.username}_${estate.id}`;
+
+  // Elimina la imagen de Supabase
+  this.supabase.delete(`${folderName}/${fileName}`).then(() => {
+      // Elimina la imagen del array de fotos
+      estate.photos.splice(index, 1);
+
+      // Actualiza el estate en localStorage
+      localStorage.setItem(`${this.currentUser!.username}_${estate.id}`, JSON.stringify(estate));
+
+      // Recarga las propiedades (opcional)
+      this.loadEstates();
+  }).catch((error) => {
+      console.error("Error al eliminar la imagen:", error);
+  });
+}
+
+
 }

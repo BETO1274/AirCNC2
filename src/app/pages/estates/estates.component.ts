@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Estates, User } from '../../interfaces/user.interface';
 import { CommonModule } from '@angular/common';
@@ -7,11 +7,12 @@ import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import { SupabaseService } from '../../services/supabase.service';
 import { RouterLink } from '@angular/router';
+import { SearchBarComponent } from '../../search-bar/search-bar.component';
 
 @Component({
   selector: 'app-estates',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink,FormsModule,SearchBarComponent],
   templateUrl: './estates.component.html',
   styleUrls: ['./estates.component.css']
 })
@@ -21,15 +22,19 @@ export class EstatesComponent implements OnInit {
   currentUser: User | null = null;
   estates: Estates[] = []; // Para almacenar las propiedades cargadas
   photos:string[]=[]
+  searchQuery: string = ''; // Query de búsqueda
+  filteredEstates:Estates[]=[]
 
   constructor(private auth: AuthService,private supabase:SupabaseService) { }
   isUserActive: boolean = false;
 
   ngOnInit() {
+ 
+    this.lastId = this.getLastId(); // Establecer el último ID
     this.currentUser = this.auth.getCurrentUser();
     this.loadEstates();
     this.checkUserActive();
-    this.lastId = this.getLastId(); // Establecer el último ID
+    this.filteredEstates = this.estates;
   }
 
   checkUserActive() {
@@ -45,14 +50,33 @@ export class EstatesComponent implements OnInit {
   }
 
   loadEstates() {
-    if (this.currentUser) {
-      this.estates = Object.keys(localStorage)
-        .filter(key => key.startsWith(`${this.currentUser!.username}_`))
-        .map(key => JSON.parse(localStorage.getItem(key)!));
+    this.estates = this.loadUserEstates(); // Cargar propiedades del usuario
+    this.filteredEstates = this.estates; // Inicialmente mostramos todas las propiedades
+}
 
-    //  console.log('Loaded Estates:', this.estates);
-    }
-  }
+loadUserEstates(): Estates[] {
+  if (!this.currentUser) return [];
+  
+  return Object.keys(localStorage)
+      .filter(key => key.startsWith(`${this.currentUser!.username}_`))
+      .map(key => JSON.parse(localStorage.getItem(key)!));
+}
+
+filterEstates() {
+  const query = this.searchQuery.toLowerCase();
+  this.filteredEstates = this.estates.filter(estate => {
+      return (
+          estate.title.toLowerCase().includes(query) ||
+          estate.description.toLowerCase().includes(query) ||
+          estate.address.toLowerCase().includes(query) ||
+          estate.pricePerNight.toString().includes(query) || // Filtrar por precio
+          estate.bedrooms.toString().includes(query) || // Filtrar por habitaciones
+          estate.bathrooms.toString().includes(query) || // Filtrar por baños
+          estate.maxCapacity.toString().includes(query) // Filtrar por capacidad
+      );
+  });
+}
+
 
   async addEstate() {
     if (!this.currentUser) {
@@ -127,7 +151,7 @@ export class EstatesComponent implements OnInit {
     }
   }
 
-  async editEstate(estate: Estates) {
+ async editEstate(estate: Estates) {
     const { value: formValues } = await Swal.fire({
       title: 'Editar Propiedad',
       html: `
@@ -195,7 +219,7 @@ export class EstatesComponent implements OnInit {
       }
     }
   }
-  async deleteEstate(id: number) {
+ async deleteEstate(id: number) {
 
     Swal.fire({
       title: '¿Estás seguro?',
@@ -219,8 +243,6 @@ export class EstatesComponent implements OnInit {
       }
     });
   }
-
-
 
 async onUpload(event: Event, estate: Estates) {
   let inputFile = event.target as HTMLInputElement;

@@ -1,5 +1,12 @@
+<div class="search-container">
+  <app-search-bar 
+      [placeholder]="'Buscar propiedades'"
+      (search)="handleSearch($event)">
+  </app-search-bar>
+</div>
+
 <div class="estates-container">
-    <div *ngFor="let estate of estates" class="estate-item">
+    <div *ngFor="let estate of filteredEstates" class="estate-item">
       <div *ngIf="estate.id !== undefined" class="estate-card">
         <h2>{{ estate.title }}</h2>
         <div class="image-container">
@@ -13,20 +20,16 @@
         <p><strong>Capacidad máxima:</strong> {{ estate.maxCapacity }}</p>
       </div>
     </div>
-  </div>
-
-
+</div>
 
 <div class="cta">
     <h3>¿Listo para AirCNC? </h3>
-
     <p>
         ¡Publica tu espacio con nosotros y conecta con viajeros de todo el mundo!
         <br> Es fácil y rápido. Empieza a ganar dinero hoy mismo.
     </p>
     <a href="" class="cta-btn">Más información</a>
 </div>
-
 
 <div class="about-msg">
     <h2>Acerca de AirCNC</h2>
@@ -39,6 +42,4 @@
 
         Descubre cómo AirCNN puede ayudarte a maximizar el potencial de tu propiedad o encontrar el lugar
         perfecto para tu próxima aventura. ¡Estamos aquí para hacer que cada estancia sea inolvidable!</p>
-
-
 </div>

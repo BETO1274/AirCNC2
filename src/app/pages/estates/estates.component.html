@@ -1,3 +1,4 @@
+<div class="estate" *ngIf="isUserActive; else noUserTemplate"></div>
 <div *ngIf="estates.length > 0">
   <ul>
     <li *ngFor="let estate of estates">
@@ -10,8 +11,8 @@
           <p>Número de Habitaciones: {{ estate.bedrooms }}</p>
           <p>Número de Baños: {{ estate.bathrooms }}</p>
           <p>Capacidad Máxima: {{ estate.maxCapacity }}</p>
-       
-       
+
+
           <button class="btn edit-btn" (click)="editEstate(estate)">Editar</button>
           <button class="btn delete-btn" (click)="deleteEstate(estate.id)">Eliminar</button>
           <input type="file" #fileInput (change)="onUpload($event, estate)" style="display: none;" />
@@ -26,9 +27,20 @@
           </div>
         </div>
 
-       
-    
-      </div> <!-- Cierre del div estate-info -->
-    </li> <!-- Cierre del li -->
-  </ul> <!-- Cierre del ul -->
+
+
+      </div>
+  </ul>
 </div>
+
+<ng-template #noUserTemplate>
+  <div class="no-user-container">
+    <p class="no-user-message">No hay un usuario activo.</p>
+    <p>¡Estás a un paso de comenzar tu aventura en el mundo de las propiedades! Crea tu perfil y empieza a compartir
+      tus espacios únicos.</p>
+
+    <div>
+      <a [routerLink]="['/sign-up']" class="register-btn">¡Crea tu perfil aquí!</a>
+      <a [routerLink]="['/login']" class="register-btn">¡Inicia sesión!</a>
+
+    </div>

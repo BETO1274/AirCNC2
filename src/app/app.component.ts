@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './layout/components/footer/footer.component';
 import { NavbarComponent } from './layout/components/navbar/navbar.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
+import { SearchBarComponent } from './layout/components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-root',

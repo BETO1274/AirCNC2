@@ -1,12 +1,12 @@
 <div class="estates-container">
-  <div *ngIf="isUserActive; else noUserTemplate">
-    <h1>Administrador de Propiedades</h1>
-    <div class="search-container">
-      <app-search-bar 
-          [placeholder]="'Buscar propiedades...'"
-          (input)="filterEstates()">
-      </app-search-bar>
-    </div>
+  <div class="search-container">
+
+    <div *ngIf="isUserActive; else noUserTemplate">
+      <h1>Administrador de Propiedades</h1>
+    
+
+    <app-search-bar [placeholder]="'Buscar...'" (search)="handleSearch($event)">
+    </app-search-bar>
 
     <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
 

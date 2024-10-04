@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { SearchBarComponent } from '../../search-bar/search-bar.component';
+import { SearchBarComponent } from '../../layout/components/search-bar/search-bar.component';
 
 @Component({
     selector: 'app-home',

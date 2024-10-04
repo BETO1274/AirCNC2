@@ -28,6 +28,10 @@ export class AuthService {
       this.currentUser.profilePicture = updatedUser.profilePicture;
       this.currentUser.biography = updatedUser.biography;
       this.currentUser.email = updatedUser.email;
+      this.currentUser.phoneNumber=updatedUser.phoneNumber;
+      this.currentUser.preferences=updatedUser.preferences;
+      this.currentUser.verified=updatedUser.verified;
+      
 
       // Guardar el usuario actualizado en localStorage
       localStorage.setItem(this.currentUser.username, JSON.stringify(this.currentUser));

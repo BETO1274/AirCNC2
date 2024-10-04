@@ -7,7 +7,8 @@ import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import { SupabaseService } from '../../services/supabase.service';
 import { RouterLink } from '@angular/router';
-import { SearchBarComponent } from '../../search-bar/search-bar.component';
+import { SearchBarComponent } from '../../layout/components/search-bar/search-bar.component';
+
 
 @Component({
   selector: 'app-estates',
@@ -32,9 +33,9 @@ export class EstatesComponent implements OnInit {
  
     this.lastId = this.getLastId(); // Establecer el último ID
     this.currentUser = this.auth.getCurrentUser();
-    this.loadEstates();
+    this.loadAllEstates();
     this.checkUserActive();
-    this.filteredEstates = this.estates;
+   
   }
 
   checkUserActive() {
@@ -49,31 +50,43 @@ export class EstatesComponent implements OnInit {
     return estates.length > 0 ? Math.max(...estates.map(e => e.id)) : 0; // Devuelve el ID más alto
   }
 
-  loadEstates() {
-    this.estates = this.loadUserEstates(); // Cargar propiedades del usuario
-    this.filteredEstates = this.estates; // Inicialmente mostramos todas las propiedades
-}
-
-loadUserEstates(): Estates[] {
-  if (!this.currentUser) return [];
+  loadAllEstates() {
+    this.estates = this.loadEstatesFromLocalStorage();
+    this.filteredEstates = [...this.estates]; // Copia para evitar referencia directa
+  }
   
+
+
+private loadEstatesFromLocalStorage(): any[] {
   return Object.keys(localStorage)
-      .filter(key => key.startsWith(`${this.currentUser!.username}_`))
-      .map(key => JSON.parse(localStorage.getItem(key)!));
+      .map(key => {
+          const item = localStorage.getItem(key);
+          return this.parseItem(item, key);
+      })
+      .filter(estate => estate && estate.id !== undefined && this.currentUser!.username);
+}
+private parseItem(item: string | null, key: string): any | null {
+  try {
+      return item ? JSON.parse(item) : null;
+  } catch (error) {
+      console.error(`Error parsing item ${key}:`, error);
+      return null;
+  }
 }
 
-filterEstates() {
-  const query = this.searchQuery.toLowerCase();
+
+handleSearch(event: { query: string}) {
+  const query= event.query.toLowerCase();
   this.filteredEstates = this.estates.filter(estate => {
-      return (
-          estate.title.toLowerCase().includes(query) ||
-          estate.description.toLowerCase().includes(query) ||
-          estate.address.toLowerCase().includes(query) ||
-          estate.pricePerNight.toString().includes(query) || // Filtrar por precio
-          estate.bedrooms.toString().includes(query) || // Filtrar por habitaciones
-          estate.bathrooms.toString().includes(query) || // Filtrar por baños
-          estate.maxCapacity.toString().includes(query) // Filtrar por capacidad
-      );
+      const matchesQuery =estate.description.toLowerCase().includes(query) ||
+      estate.title.toLowerCase().includes(query) ||
+      estate.address.toLowerCase().includes(query) ||
+      estate.pricePerNight.toString().includes(query) || // Filtrar por precio
+      estate.bedrooms.toString().includes(query) || // Filtrar por habitaciones
+      estate.bathrooms.toString().includes(query) || // Filtrar por baños
+      estate.maxCapacity.toString().includes(query) ;
+    
+      return matchesQuery;
   });
 }
 
@@ -143,7 +156,7 @@ filterEstates() {
 
       try {
         localStorage.setItem(`${this.currentUser!.username}_${newEstate.id}`, JSON.stringify(newEstate));
-        this.loadEstates();
+        this.loadAllEstates();
         Swal.fire('¡Agregado!', 'La propiedad ha sido agregada.', 'success');
       } catch (error) {
         console.error('Error saving to localStorage', error);
@@ -151,35 +164,65 @@ filterEstates() {
     }
   }
 
- async editEstate(estate: Estates) {
+  async editEstate(estate: Estates) {
     const { value: formValues } = await Swal.fire({
       title: 'Editar Propiedad',
       html: `
-        <input id="title" class="swal2-input" placeholder="Título" value="${estate.title}">
-        <input id="description" class="swal2-input" placeholder="Descripción" value="${estate.description}">
-        <input id="address" class="swal2-input" placeholder="Dirección" value="${estate.address}">
-        <input id="pricePerNight" class="swal2-input" placeholder="Precio por Noche" type="number" value="${estate.pricePerNight}">
-        <input id="bedrooms" class="swal2-input" placeholder="Número de Habitaciones" type="number" value="${estate.bedrooms}">
-        <input id="bathrooms" class="swal2-input" placeholder="Número de Baños" type="number" value="${estate.bathrooms}">
-        <input id="maxCapacity" class="swal2-input" placeholder="Capacidad Máxima" type="number" value="${estate.maxCapacity}">
-        <input type="file" id="file-input"(change)="onUpload($event,estate)" style="display: none;">
-        <label for="file-input" style="display: inline-block; padding: 10px 15px; border: none; border-radius: 5px; background-color: #007bff; color: white; cursor: pointer; text-align: center; margin-top: 10px; margin-bottom: 10px;">Subir Imagen</label>
+        <div style="display: flex; flex-direction: column; gap: 15px; max-width: 500px;">
+          <div style="display: flex; align-items: center;">
+            <label for="title" style="width: 150px; margin-right: 10px;">Título:</label>
+            <input id="title" class="swal2-input" style="flex: 1; padding: 10px; border: 1px solid #ccc;" value="${estate.title}">
+          </div>
+          
+          <div style="display: flex; align-items: center;">
+            <label for="description" style="width: 150px; margin-right: 10px;">Descripción:</label>
+            <textarea id="description" class="swal2-textarea" style="flex: 1; padding: 10px; border: 1px solid #ccc; resize: none;" rows="3">${estate.description}</textarea>
+          </div>
+          
+          <div style="display: flex; align-items: center;">
+            <label for="address" style="width: 150px; margin-right: 10px;">Dirección:</label>
+            <input id="address" class="swal2-input" style="flex: 1; padding: 10px; border: 1px solid #ccc;" value="${estate.address}">
+          </div>
+          
+          <div style="display: flex; align-items: center;">
+            <label for="pricePerNight" style="width: 150px; margin-right: 10px;">Precio por Noche:</label>
+            <input id="pricePerNight" class="swal2-input" type="number" style="flex: 1; padding: 10px; border: 1px solid #ccc;" value="${estate.pricePerNight}">
+          </div>
+          
+          <div style="display: flex; align-items: center;">
+            <label for="bedrooms" style="width: 150px; margin-right: 10px;">Número de Habitaciones:</label>
+            <input id="bedrooms" class="swal2-input" type="number" style="flex: 1; padding: 10px; border: 1px solid #ccc;" value="${estate.bedrooms}">
+          </div>
+          
+          <div style="display: flex; align-items: center;">
+            <label for="bathrooms" style="width: 150px; margin-right: 10px;">Número de Baños:</label>
+            <input id="bathrooms" class="swal2-input" type="number" style="flex: 1; padding: 10px; border: 1px solid #ccc;" value="${estate.bathrooms}">
+          </div>
+          
+          <div style="display: flex; align-items: center;">
+            <label for="maxCapacity" style="width: 150px; margin-right: 10px;">Capacidad Máxima:</label>
+            <input id="maxCapacity" class="swal2-input" type="number" style="flex: 1; padding: 10px; border: 1px solid #ccc;" value="${estate.maxCapacity}">
+          </div>
+        </div>
       `,
+      customClass: {
+        container: 'custom-modal'
+      },
       focusConfirm: false,
       preConfirm: () => {
         const title = (document.getElementById('title') as HTMLInputElement).value;
-        const description = (document.getElementById('description') as HTMLInputElement).value;
+        const description = (document.getElementById('description') as HTMLTextAreaElement).value;
         const address = (document.getElementById('address') as HTMLInputElement).value;
         const pricePerNight = parseFloat((document.getElementById('pricePerNight') as HTMLInputElement).value);
         const bedrooms = parseInt((document.getElementById('bedrooms') as HTMLInputElement).value, 10);
         const bathrooms = parseInt((document.getElementById('bathrooms') as HTMLInputElement).value, 10);
         const maxCapacity = parseInt((document.getElementById('maxCapacity') as HTMLInputElement).value, 10);
-  
+        
         if (!title || !description || !address || isNaN(pricePerNight) || isNaN(bedrooms) || isNaN(bathrooms) || isNaN(maxCapacity)) {
           Swal.showValidationMessage('Por favor, completa todos los campos correctamente.');
           return null;
         }
-  
+    
         return {
           id: estate.id,
           username: estate.username,
@@ -195,7 +238,7 @@ filterEstates() {
       },
       showCancelButton: true,
     });
-  
+    
     if (formValues) {
       const updatedEstate = {
         username: formValues.username,
@@ -209,16 +252,18 @@ filterEstates() {
         maxCapacity: formValues.maxCapacity,
         photos: formValues.photos
       };
-  
+    
       try {
         localStorage.setItem(`${this.currentUser!.username}_${updatedEstate.id}`, JSON.stringify(updatedEstate));
         Swal.fire('¡Actualizado!', 'La propiedad ha sido actualizada.', 'success');
-        this.loadEstates(); // Recargar la lista de propiedades
+        this.loadAllEstates(); // Recargar la lista de propiedades
       } catch (error) {
         console.error('Error updating localStorage', error);
       }
     }
   }
+  
+  
  async deleteEstate(id: number) {
 
     Swal.fire({
@@ -234,7 +279,7 @@ filterEstates() {
       if (result.isConfirmed) {
         try {
           localStorage.removeItem(`${this.currentUser!.username}_${id}`);
-          this.loadEstates(); // Recargar la lista de propiedades después de eliminar
+          this.loadAllEstates(); // Recargar la lista de propiedades después de eliminar
           Swal.fire('¡Eliminado!', 'La propiedad ha sido eliminada.', 'success');
 
         } catch (error) {
@@ -265,7 +310,7 @@ async onUpload(event: Event, estate: Estates) {
       localStorage.setItem(`${this.currentUser!.username}_${estate.id}`, JSON.stringify(updatedEstate));
 
       // Actualiza la lista de propiedades
-      this.loadEstates();
+      this.loadAllEstates();
   } catch (error) {
       console.error("Error al subir la imagen:", error);
   }
@@ -285,7 +330,7 @@ async deleteImage(photoUrl: string, estate: Estates, index: number) {
       localStorage.setItem(`${this.currentUser!.username}_${estate.id}`, JSON.stringify(estate));
 
       // Recarga las propiedades (opcional)
-      this.loadEstates();
+      this.loadAllEstates();
   }).catch((error) => {
       console.error("Error al eliminar la imagen:", error);
   });

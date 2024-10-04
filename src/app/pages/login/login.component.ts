@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { REACTIVE_NODE } from '@angular/core/primitives/signals';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../interfaces/user.interface';
@@ -11,49 +10,45 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private auth:AuthService) {}
-
-  loginForm = this.fb.group({
-    username: ['', [Validators.required, Validators.pattern('')]],
-    password: ['', [Validators.required]]
-  })
+  constructor(private fb: FormBuilder, private router: Router, private auth: AuthService) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
+  }
 
   onlogin() {
-
-    const user : User={
-       username: this.loginForm.value.username|| '',
-       password: this.loginForm.value.password || '',
-
-    } 
-    
-    let storedPassword = localStorage.getItem(user.username);
-
-
-
-    if (!this.loginForm.valid) {
-      alert('Diligencie el formulario');
+    if (this.loginForm.invalid) {
+      Swal.fire('Error', 'Diligencie el formulario correctamente.', 'error');
       return;
     }
-    if (storedPassword) {
-      
-      const userSt = JSON.parse(storedPassword);
-      
-    
+
+    const user: User = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password
+    };
+
+    const storedPassword = localStorage.getItem(user.username);
+
+    if (!storedPassword) {
+      Swal.fire('Error', 'Verifique nombre de usuario o contraseña', 'error');
+      return;
+    }
+
+    const userSt = JSON.parse(storedPassword);
+
     if (user.password !== userSt.password) {
-      Swal.fire("Verifique nombre de usuario o contraseña");
-       
+      Swal.fire('Error', 'Verifique nombre de usuario o contraseña', 'error');
       return;
     }
 
-    this.auth.login(user.username)
-    this.router.navigateByUrl('/home')
-  }else{
-    Swal.fire("Verifique nombre de usuario o contraseña");
-
+    this.auth.login(user.username); // Guarda el usuario en AuthService
+    this.router.navigateByUrl('/home');
+    Swal.fire('Éxito', 'Has iniciado sesión correctamente.', 'success');
   }
- }
 }

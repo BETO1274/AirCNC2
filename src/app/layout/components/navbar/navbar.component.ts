@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
       this.auth.logout(); // Llama al método de cerrar sesión
       this.router.navigateByUrl('/home'); // Redirige a la página de inicio
       Swal.fire('¡Cerrado!', 'Has cerrado sesión correctamente.', 'success');
+      this.isUserActive=false
     }
   }
 }

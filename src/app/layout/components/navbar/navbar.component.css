@@ -12,6 +12,25 @@ nav {
     z-index: 1000; /* Asegura que el menú esté por encima de otros elementos */
 }
 
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center; /* Alinea icono y texto */
+    position: relative; /* Para el efecto hover */
+    padding: 10px; /* Agrega un poco de padding para hacer el área clickeable más grande */
+}
+
+.nav-links a i {
+    margin-right: 5px; /* Espaciado entre el icono y el texto */
+    font-size: 20px; /* Ajusta el tamaño del icono según sea necesario */
+}
+
+.disabled {
+    display: none;
+}
+
+
 .logo img {
     width: 140px; /* Ajusta según el tamaño del logo */
 }
@@ -58,6 +77,7 @@ nav {
     transition: background 0.3s, color 0.3s; /* Transición suave para el fondo y el color */
     cursor: pointer; /* Cambia el cursor a pointer */
 }
+
 
 .login-btn:hover {
     color: #fff; /* Color del texto */

@@ -1,11 +1,4 @@
-/* Estilo para el encabezado */
-h2 {
-  display: flex;
-  align-items: center; /* Centrar verticalmente el ícono con el texto */
-  font-size: 24px; /* Tamaño de fuente del encabezado */
-  color: #333; /* Color del texto */
-  margin-bottom: 20px; /* Espacio debajo del encabezado */
-}
+
 
 /* Estilo para el ícono */
 h2 i {
@@ -27,12 +20,13 @@ h2 i {
 
 /* Estilo para el campo de texto */
 input[type="text"] {
-  border: none; /* Sin borde en el input */
+  border: solid;
+  color: #007BFF; /* Sin borde en el input */
   outline: none; /* Sin contorno */
   padding: 10px;
   font-size: 16px;
-  width: 300px; /* Ancho del input */
-  border-radius: 25px; /* Bordes redondeados */
+  width: 1000px; /* Ancho del input */
+  border-radius: 30px; /* Bordes redondeados */
 }
 
 /* Estilo para el placeholder */
@@ -40,20 +34,4 @@ input[type="text"]::placeholder {
   color: #999; /* Color del placeholder */
 }
 
-/* Estilo para el botón (si lo necesitas en la barra de búsqueda) */
-button {
-  background-color: #007BFF; /* Color de fondo del botón */
-  color: white; /* Color del texto */
-  border: none; /* Sin borde */
-  border-radius: 25px; /* Bordes redondeados */
-  padding: 10px 20px; /* Padding del botón */
-  font-size: 16px;
-  cursor: pointer; /* Cambia el cursor al pasar el mouse */
-  margin-left: 10px; /* Espaciado entre el input y el botón */
-  transition: background-color 0.3s ease; /* Transición suave para el fondo */
-}
 
-/* Efecto hover para el botón */
-button:hover {
-  background-color: #0056b3; /* Cambia el color del fondo al pasar el mouse */
-}

@@ -1,25 +1,20 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+// search-bar.component.ts
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-search-bar',
-    standalone: true,
-    templateUrl: './search-bar.component.html',
-    styleUrls: ['./search-bar.component.css'],
-    imports: [CommonModule, FormsModule]
+  selector: 'app-search-bar',
+  template: `
+    <input type="text" (input)="handleInput($event)" placeholder="Buscar propiedades..." />
+  `,
+  styleUrls: ['./search-bar.component.css'],
+
+  standalone:true,
 })
 export class SearchBarComponent {
-    @Input() placeholder: string = 'Buscar...';
-    @Output() search = new EventEmitter<{ query: string }>(); // Asegúrate de emitir un objeto
+  @Output() search = new EventEmitter<string>();
 
-    query: string = '';
-
-    onSearch() {
-        this.search.emit({ query: this.query }); // Emitir cada vez que se busca
-    }
-
-    onInputChange() {
-        this.search.emit({ query: this.query }); // Emitir en tiempo real
-    }
+  handleInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.search.emit(inputElement.value); // Emitir solo la query
+  }
 }

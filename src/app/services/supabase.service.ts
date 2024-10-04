@@ -1,8 +1,9 @@
 import { EnvironmentInjector, Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../envorinments/environment.dev';
-import { AuthService } from './auth.service';
+
 import { User } from '../interfaces/user.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'

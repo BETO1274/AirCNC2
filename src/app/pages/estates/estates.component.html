@@ -1,54 +1,34 @@
-<div class="estates-container">
-  <div *ngIf="isUserActive; else noUserTemplate">
-  <h1>Administrador de Propiedades</h1>
-  <h2>Lista de Propiedades</h2>
-
-  
-    <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
-
-    <div *ngIf="estates.length > 0">
-      <ul>
-        <li *ngFor="let estate of estates">
-          <div class="estate-info">
-            <div>
-              <h3>{{ estate.title }}</h3>
-              <p>{{ estate.description }}</p>
-              <p>Dirección: {{ estate.address }}</p>
-              <p>Precio por Noche: ${{ estate.pricePerNight }}</p>
-              <p>Número de Habitaciones: {{ estate.bedrooms }}</p>
-              <p>Número de Baños: {{ estate.bathrooms }}</p>
-              <p>Capacidad Máxima: {{ estate.maxCapacity }}</p>
-            </div>
-            <div *ngIf="estate.photos.length > 0" class="photo-gallery">
-              <div *ngFor="let photo of estate.photos;let i = index">
-                <img [src]="photo" alt="{{ estate.title }}" class="estate-photo">
-                <button (click)="deleteImage(photo, estate, i)" class="btn delete-image-btn">Eliminar Imagen</button>
-              </div>
-            </div>
+<div *ngIf="estates.length > 0">
+  <ul>
+    <li *ngFor="let estate of estates">
+      <div class="estate-info">
+        <div>
+          <h3>{{ estate.title }}</h3>
+          <p>{{ estate.description }}</p>
+          <p>Dirección: {{ estate.address }}</p>
+          <p>Precio por Noche: ${{ estate.pricePerNight }}</p>
+          <p>Número de Habitaciones: {{ estate.bedrooms }}</p>
+          <p>Número de Baños: {{ estate.bathrooms }}</p>
+          <p>Capacidad Máxima: {{ estate.maxCapacity }}</p>
+       
+       
+          <button class="btn edit-btn" (click)="editEstate(estate)">Editar</button>
+          <button class="btn delete-btn" (click)="deleteEstate(estate.id)">Eliminar</button>
+          <input type="file" #fileInput (change)="onUpload($event, estate)" style="display: none;" />
+          <button class="btn upload-btn" (click)="fileInput.click();">Subir Imagen</button>
+        </div>
+        <div *ngIf="estate.photos.length > 0" class="photo-gallery">
+          <div *ngFor="let photo of estate.photos; let i = index" class="photo-container">
+            <img [src]="photo" alt="{{ estate.title }}" class="estate-photo">
+            <a (click)="deleteImage(photo, estate, i)" class="delete-icon" aria-label="Eliminar imagen">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
           </div>
+        </div>
 
-          <div class="button-group">
-            <button class="btn edit-btn" (click)="editEstate(estate)">Editar</button>
-            <button class="btn delete-btn" (click)="deleteEstate(estate.id)">Eliminar</button>
-            <input type="file" #fileInput (change)="onUpload($event, estate)" style="display: none;" />
-            <button class="btn upload-btn" (click)="fileInput.click();">Subir Imagen</button>
-            
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div *ngIf="estates.length === 0">
-      <p>No hay propiedades disponibles.</p>
-    </div>
-  </div>
-
-  <ng-template #noUserTemplate>
-    <div class="no-user-container">
-      <p class="no-user-message">No hay un usuario activo.</p>
-      <p>Por favor, inicia sesión para agregar propiedades.</p>
-      <a [routerLink]="['/sign-up']" class="register-btn">Registrarse</a>
-    </div>
-  </ng-template>
-
+       
+    
+      </div> <!-- Cierre del div estate-info -->
+    </li> <!-- Cierre del li -->
+  </ul> <!-- Cierre del ul -->
 </div>

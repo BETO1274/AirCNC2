@@ -220,8 +220,6 @@ export class EstatesComponent implements OnInit {
     });
   }
 
-
-
 async onUpload(event: Event, estate: Estates) {
   let inputFile = event.target as HTMLInputElement;
   if (!inputFile.files || inputFile.files.length <= 0) {

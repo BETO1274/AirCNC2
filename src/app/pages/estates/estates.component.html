@@ -4,9 +4,7 @@
     <div *ngIf="isUserActive; else noUserTemplate">
       <h1>Administrador de Propiedades</h1>
     
-
-    <app-search-bar [placeholder]="'Buscar...'" (search)="handleSearch($event)">
-    </app-search-bar>
+      <app-search-bar (search)="handleSearch($event)"></app-search-bar>
 
     <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
 

@@ -1,64 +1,49 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { SearchBarComponent } from '../../layout/components/search-bar/search-bar.component';
-import Swal from 'sweetalert2';
-import { Estates } from '../../interfaces/user.interface';
+import { Component, OnInit } from '@angular/core';
 
+
+import Swal from 'sweetalert2';
+import { EstatesService } from '../../services/estates.service';
+import { Estates } from '../../interfaces/user.interface';
+import { SearchBarComponent } from '../../layout/components/search-bar/search-bar.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-home',
-    standalone: true,
-    imports: [CommonModule, SearchBarComponent],
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+  selector: 'app-home',
+  standalone:true,
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
+  imports:[SearchBarComponent,CommonModule],
+ 
 })
-export class HomeComponent {
-    estates: any[] = [];
-    filteredEstates: any[] = [];
+export class HomeComponent implements OnInit {
+  estates: Estates[] = [];
+  filteredEstates: Estates[] = [];
+  query: string = '';
 
-    ngOnInit(): void {
-        this.loadAllEstates(); // Carga todas las propiedades al inicializar el componente
-    }
+  constructor(private estatesService: EstatesService) {}
 
-    loadAllEstates() {
-        this.estates = this.loadEstatesFromLocalStorage();
-        this.filteredEstates = this.estates; // Inicialmente mostramos todas las propiedades
-    }
+  ngOnInit() {
+    this.loadAllEstates();
+  }
 
-    private loadEstatesFromLocalStorage(): any[] {
-        return Object.keys(localStorage)
-            .map(key => {
-                const item = localStorage.getItem(key);
-                return this.parseItem(item, key);
-            })
-            .filter(estate => estate && estate.id !== undefined);
-    }
+  loadAllEstates() {
+    this.estates = this.estatesService.getAllEstates();
+    this.filteredEstates = [...this.estates]; // Copia para evitar referencia directa
+  }
 
-    private parseItem(item: string | null, key: string): any | null {
-        try {
-            return item ? JSON.parse(item) : null;
-        } catch (error) {
-            console.error(`Error parsing item ${key}:`, error);
-            return null;
-        }
-    }
-
-    handleSearch(event: { query: string}) {
-        const {query} = event;
-        this.filteredEstates = this.estates.filter(estate => {
-            const matchesQuery =estate.description.toLowerCase().includes(query) ||
-            estate.title.toLowerCase().includes(query) ||
-            estate.address.toLowerCase().includes(query) ||
-            estate.pricePerNight.toString().includes(query) || // Filtrar por precio
-            estate.bedrooms.toString().includes(query) || // Filtrar por habitaciones
-            estate.bathrooms.toString().includes(query) || // Filtrar por baños
-            estate.maxCapacity.toString().includes(query) ;
-          
-            return matchesQuery;
-        });
-    }
-
-
+  handleSearch(query: string) {
+    this.query = query.toLowerCase();
+    this.filteredEstates = this.estates.filter(estate => {
+      return estate.title.toLowerCase().includes(this.query) ||
+             estate.description.toLowerCase().includes(this.query) ||
+             estate.address.toLowerCase().includes(this.query) ||
+             estate.pricePerNight.toString().includes(this.query) ||
+             estate.bedrooms.toString().includes(this.query) ||
+             estate.bathrooms.toString().includes(this.query) ||
+             estate.maxCapacity.toString().includes(this.query);
+    });
+  }
     openModal(estate: Estates) {
         Swal.fire({
           title: 'Detalles de la Propiedad',

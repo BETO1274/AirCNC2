@@ -1,16 +1,14 @@
 <div class="estates-container">
-  <div class="search-container">
+  <div *ngIf="isUserActive; else noUserTemplate">
+  <h1>Administrador de Propiedades</h1>
+  <h2>Lista de Propiedades</h2>
 
-    <div *ngIf="isUserActive; else noUserTemplate">
-      <h1>Administrador de Propiedades</h1>
-    
-      <app-search-bar (search)="handleSearch($event)"></app-search-bar>
-
+  
     <a (click)="addEstate()" class="btn add-property-btn">Agregar Propiedad</a>
 
     <div *ngIf="estates.length > 0">
       <ul>
-        <li *ngFor="let estate of filteredEstates">
+        <li *ngFor="let estate of estates">
           <div class="estate-info">
             <div>
               <h3>{{ estate.title }}</h3>
@@ -22,7 +20,7 @@
               <p>Capacidad Máxima: {{ estate.maxCapacity }}</p>
             </div>
             <div *ngIf="estate.photos.length > 0" class="photo-gallery">
-              <div *ngFor="let photo of estate.photos; let i = index">
+              <div *ngFor="let photo of estate.photos;let i = index">
                 <img [src]="photo" alt="{{ estate.title }}" class="estate-photo">
                 <button (click)="deleteImage(photo, estate, i)" class="btn delete-image-btn">Eliminar Imagen</button>
               </div>
@@ -34,12 +32,13 @@
             <button class="btn delete-btn" (click)="deleteEstate(estate.id)">Eliminar</button>
             <input type="file" #fileInput (change)="onUpload($event, estate)" style="display: none;" />
             <button class="btn upload-btn" (click)="fileInput.click();">Subir Imagen</button>
+            
           </div>
         </li>
       </ul>
     </div>
 
-    <div *ngIf="filteredEstates.length === 0">
+    <div *ngIf="estates.length === 0">
       <p>No hay propiedades disponibles.</p>
     </div>
   </div>
@@ -51,4 +50,5 @@
       <a [routerLink]="['/sign-up']" class="register-btn">Registrarse</a>
     </div>
   </ng-template>
+
 </div>

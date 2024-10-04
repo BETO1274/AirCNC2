@@ -1,48 +1,33 @@
-<div class="profile" *ngIf="isUserActive; else noUserTemplate">
-  <h1>Información de Usuario</h1>
-  <div class="profile-container">
-    <div class="profile-left">
-      <img [src]="currentUser!.profilePicture" alt="Foto de Perfil" class="profile-picture">
-      <p><strong>Nombre de usuario:</strong> {{ currentUser?.username }}</p>
-      <p><strong>Correo:</strong> {{ currentUser?.email }}</p>
-      <p>
-        <strong>Verificado:</strong>
-        <span class="verified-icon" *ngIf="currentUser?.verified">✔️</span>
-        {{ currentUser?.verified ? 'Sí' : 'No' }}
-      </p>
-      <p><strong>Número de Teléfono:</strong> {{ currentUser?.phoneNumber }}</p>
 
-      <div class="profile-actions">
-        <a (click)="openUpdateProfileModal()" class="login-btn">
-          <i class="fas fa-edit"></i>
-        </a>
-      
-      <input type="file" id="file-input" (change)="onUpload($event)" style="display: none;">
-      <label for="file-input" class="btn upload-btn">
-        <i class="fas fa-upload"></i>
-      </label>
+   
+    <div class="profile" *ngIf="isUserActive; else noUserTemplate">
+      <h1>Información de Usuario</h1><br>
+      <div class="profile-container">
+        <img [src]="currentUser!.profilePicture" alt="Foto de Perfil">
+
+        <div class="profile-info">
+          <p><strong>Correo:</strong> {{ currentUser?.email }}</p>
+          <p><strong>Nombre de usuario:</strong> {{ currentUser?.username }}</p>
+          <p><strong>Biografía:</strong> {{ currentUser?.biography }}</p>
+
+          <div>
+            <a (click)="openUpdateProfileModal()" class="login-btn">Editar Perfil</a>
+            
+            <input type="file" id="file-input" (change)="onUpload($event)" style="display: none;">
+            <label for="file-input" class="btn upload-btn">Subir Imagen</label>
+          </div>
+        </div>
+      </div>
     </div>
+ 
+
+
+
+  <ng-template #noUserTemplate>
+    <div class="no-user-container">
+      <p class="no-user-message">No hay un usuario activo.</p>
+      <p>¡Estás a un paso de comenzar tu aventura en el mundo de las propiedades! Crea tu perfil y empieza a compartir
+        tus espacios únicos.</p>
+      <a [routerLink]="['/sign-up']" class="create-profile-btn">¡Crea tu perfil aquí!</a>
     </div>
-
-    <div class="profile-right">
-      <p><strong>Biografía:</strong></p>
-      <textarea class="bio-preferences" readonly>{{ currentUser?.biography }}</textarea>
-
-      <p><strong>Preferencias de Viaje:</strong></p>
-      <textarea class="bio-preferences" readonly>{{ currentUser?.preferences }}</textarea>
-
-
-     
-    </div>
-  </div>
-</div>
-
-
-<ng-template #noUserTemplate>
-  <div class="no-user-container">
-    <p class="no-user-message">No hay un usuario activo.</p>
-    <p>¡Estás a un paso de comenzar tu aventura en el mundo de las propiedades! Crea tu perfil y empieza a compartir
-      tus espacios únicos.</p>
-    <a [routerLink]="['/sign-up']" class="create-profile-btn">¡Crea tu perfil aquí!</a>
-  </div>
-</ng-template>
+  </ng-template>

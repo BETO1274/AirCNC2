@@ -130,8 +130,8 @@ Swal.fire({
 
 
   onRegistry() {
-   const currentDate = new Date()
-    
+   
+    console.log(this.signUpForm.value)
     if (!this.signUpForm.valid) {
       Swal.fire({
         text: 'Diligencie el formulario',
@@ -144,7 +144,7 @@ Swal.fire({
 const newUser:User={
     username : this.signUpForm.value.username ?? '',
     password : this.signUpForm.value.password ?? '',  
-    email: this.signUpForm.value.email ?? ''
+    email: this.signUpForm.value.email ?? '',
     
  }
     let retypepassword = this.signUpForm.value.retypepassword

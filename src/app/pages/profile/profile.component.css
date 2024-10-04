@@ -1,116 +1,92 @@
-.profile {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  background-color: #f0f4ff; /* Fondo claro */
-  border-radius: 10px; /* Bordes redondeados */
-}
-
-h1 {
-  text-align: center; /* Centrar el título */
-  margin-bottom: 20px; /* Espaciado inferior */
-  color: #003366; /* Color azul oscuro */
-}
-
-.profile-container {
-  display: flex;
-  gap: 20px; /* Espacio entre columnas */
-}
-
-.profile-left {
-  flex: 0 0 30%; /* Toma el 30% del espacio */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrar horizontalmente */
-  background-color: #ffffff; /* Fondo blanco */
-  padding: 15px; /* Espaciado interior */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-}
-
-.profile-picture {
-  width: 200px; /* Ajustar el tamaño de la imagen */
-  height: 200px; /* Ajustar el tamaño de la imagen */
-  border-radius: 50%; /* Hacer la imagen redonda */
-  margin-bottom: 20px; /* Espaciado inferior */
-}
-.profile-right {
-  flex: 0 0 70%; /* Toma el 70% del espacio */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Alinear a la izquierda */
-  background-color: #ffffff; /* Fondo blanco */
-  padding: 15px; /* Espaciado interior */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-}
-
-.verified-icon {
-  color: #00a1d9; /* Color azul para el icono */
-  margin-left: 5px; /* Espacio entre el texto y el icono */
-}
-
-.bio-preferences {
-  width: 100%; /* Ocupa el 100% del ancho */
-  height: 100px; /* Altura fija */
-  margin-bottom: 20px; /* Espacio inferior */
-  border: 1px solid #ccc; /* Borde gris */
-  border-radius: 5px; /* Bordes redondeados */
-  resize: none; /* Deshabilitar redimensionamiento */
-  padding: 10px; /* Espaciado interior */
-  background-color: #f9f9f9; /* Fondo gris claro */
-}
-
-.profile-actions {
-  display: flex; /* Alinear botones en horizontal */
-  gap: 10px; /* Espacio entre botones */
-  margin-top: 20px; /* Espacio superior */
-}
-
-.login-btn, .upload-btn {
-  background-color: #007bff; /* Color de fondo */
-  color: white; /* Color de texto */
-  padding: 10px 15px; /* Espaciado interior */
-  border-radius: 5px; /* Bordes redondeados */
-  text-decoration: none; /* Sin subrayado */
-  display: flex; /* Flexbox para centrar icono y texto */
-  align-items: center; /* Centrar verticalmente */
-  gap: 5px; /* Espacio entre icono y texto */
-  transition: background-color 0.3s; /* Transición suave */
-}
-
-.login-btn:hover, .upload-btn:hover {
-  background-color: #0056b3; /* Color más oscuro en hover */
-}
- 
-
-.create-profile-btn{
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff; /* Azul */
-  color: white; /* Texto blanco */
-  border: none;
-  border-radius: 5px;
-  text-decoration: none; /* Sin subrayado */
-  font-size: 16px; /* Tamaño del texto */
-  transition: background 0.3s; /* Transición suave para el hover */
-  margin: 5px; /* Espacio entre botones */
-}
-
-.create-profile-btn:hover {
-  background-color: #0056b3; /* Azul más oscuro en hover */
-}
-
-.no-user-container {
-  text-align: center;
-  padding: 20px;
-  background-color: #f1f1f1; /* Fondo claro */
-  border: 1px solid #ccc; /* Borde sutil */
-  border-radius: 8px; /* Bordes redondeados */
-  margin: 20px; /* Margen alrededor del contenedor */
-}
-
-.no-user-message {
-  font-size: 20px;
-  color: #333; /* Color del texto */
-  margin-bottom: 10px; /* Espaciado inferior */
-}
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Organiza el contenido en columnas */
+  }
+  
+  .profile-container {
+    flex: 1; /* Ocupa todo el espacio disponible entre el header y el footer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile {
+    max-width: 600px;
+    margin: auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .profile img {
+    max-width: 100px;
+    border-radius: 50%;
+  }
+  
+  .login-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin: 5px;
+  }
+  
+  .login-btn:hover {
+    background-color: #0056b3;
+  }
+  .no-user-container {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9; /* Fondo claro */
+    border: 1px solid #ccc; /* Borde sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    margin: 20px; /* Margen alrededor del contenedor */
+  }
+  
+  .no-user-message {
+    font-size: 20px;
+    color: #333; /* Color del texto */
+    margin-bottom: 10px; /* Espaciado inferior */
+  }
+  
+  .create-profile-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Azul */
+    color: white; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none; /* Sin subrayado */
+    font-size: 16px; /* Tamaño del texto */
+    transition: background 0.3s; /* Transición suave para el hover */
+  }
+  
+  .create-profile-btn:hover {
+    background-color: #0056b3; /* Azul más oscuro en hover */
+  }
+  
+  .upload-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin: 5px;
+  }
+  
+  .upload-btn:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+  }

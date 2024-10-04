@@ -1,141 +1,45 @@
-/* Estilo general para el contenedor de búsqueda */
-.search-container {
-  margin-bottom: 20px; /* Espaciado inferior para el contenedor de búsqueda */
-}
-
-/* Estilo general para el contenedor de propiedades */
 .estates-container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap; /* Permite que las tarjetas se ajusten a múltiples filas */
-  gap: 10px; /* Espacio entre tarjetas */
-  padding: 10px; /* Espaciado interior */
-}
-
-.estate-item {
-  flex: 1 1 calc(50% - 10px); /* 2 tarjetas por fila, considerando el gap */
-  max-width: calc(50% - 10px); /* Limita el ancho máximo */
-  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
-  position: relative; /* Para posicionar el ícono de info */
-}
-
-.estate-card {
-  border: none; 
-  border-radius: 12px; 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
-  padding: 10px; 
-  background-color: #fff; 
-  transition: transform 0.3s, box-shadow 0.3s; 
-  display: flex; 
-  flex-direction: column; 
-  height: 350px; 
-  overflow: hidden; /* Asegura que el contenido no se desborde */
-  position: relative; /* Para el posicionamiento del ícono */
-}
-
-.image-container {
-  text-align: center; 
-  margin-bottom: 10px; 
-  flex-shrink: 0; 
-  height: 200px; 
-  overflow: hidden; 
-  border-radius: 12px; 
-}
-
-.property-image {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  transition: transform 0.3s; 
-}
-
-.estate-card h2 {
-  font-size: 1.2em; 
-  margin: 5px 0; 
-  color: #333; 
-}
-
-.estate-card p {
-  margin: 5px 0; 
-  color: #666; 
-  font-size: 0.9em; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
-}
-
-/* Estilos para el ícono de más información */
-.info-icon {
-  background-color: rgba(0, 123, 255, 0.8); /* Azul semitransparente */
-  color: white;
-  border-radius: 50%; /* Forma redonda */
-  padding: 10px; /* Espaciado interior */
-  cursor: pointer;
-  position: absolute; /* Posición absoluta para estar sobre la tarjeta */
-  bottom: 10px; /* Espaciado desde la parte inferior */
-  right: 10px; /* Espaciado desde la derecha */
-  width: 40px; /* Ancho del ícono */
-  height: 40px; /* Altura del ícono */
-  display: flex; /* Para centrar el ícono */
-  align-items: center; /* Centrar verticalmente */
-  justify-content: center; /* Centrar horizontalmente */
-  transition: background-color 0.3s; /* Transición suave */
-}
-
-.info-icon:hover {
-  background-color: rgba(0, 56, 179, 0.9); /* Azul más oscuro en hover */
-}
-
-/* Estilo para la sección de llamada a la acción */
-.cta {
-  margin: 80px 0; /* Espaciado alrededor de la sección */
-  background-image: linear-gradient(to right, #3f2321, transparent), url(../../../assets/banner2.jpg);
-  background-size: cover; 
-  background-position: center;
-  border-radius: 10px;
-  padding: 5%;
-  color: #fff;
-  text-align: center; /* Centrar contenido */
-}
-
-.cta h3 {
-  font-size: 4vw; /* Tamaño adaptable */
-  line-height: 5.3vw; /* Line height adaptable */
-  font-weight: 500;
-  margin-bottom: 10px; /* Espaciado inferior */
-}
-
-.cta p {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.cta-btn {
-  background: #00a1d9; /* Color del botón */
-  color: #fff; /* Color del texto */
-  text-decoration: none; /* Sin subrayado */
-  padding: 12px 30px; /* Espaciado del botón */
-  border-radius: 8px; /* Bordes redondeados */
-  margin-top: 20px; /* Espaciado superior */
-  display: inline-block; /* Para que sea un bloque */
-  transition: background-color 0.3s; /* Transición suave */
-}
-
-.cta-btn:hover {
-  background-color: #007bff; /* Azul más oscuro en hover */
-}
-
-/* Estilo para la sección "Acerca de AirCNC" */
-.about-msg {
-  margin-top: 30px; /* Espaciado superior */
-  padding: 20px; /* Espaciado interior */
-  border: 1px solid #ddd; /* Borde sutil */
-  border-radius: 10px; /* Bordes redondeados */
-  background-color: rgba(173, 216, 230, 0.7); /* Fondo azul claro con transparencia */
-  text-align: center; /* Centrar contenido */
-}
-
-.about-msg h2 {
-  margin-bottom: 10px; /* Espaciado inferior */
-  color: #007bff; /* Color azul */
-}
+    width: 100%;
+    display: flex; /* Usamos flexbox */
+    flex-wrap: wrap; /* Permite que las tarjetas se ajusten a múltiples filas */
+    gap: 1px; /* Espacio entre tarjetas */
+    padding: 10px; /* Espaciado interior */
+  }
+  
+  .estate-item {
+    flex: 1 1 calc(30% - 3px); /* Ajustar para que haya tres tarjetas por fila, considerando el gap */
+    max-width: calc(30% - 2px); /* Limita el ancho máximo */
+    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  }
+  
+  .estate-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 2px; /* Reducir padding */
+    background-color: #fff;
+    transition: transform 0.3s;
+    display: flex; /* Para usar flexbox dentro de la tarjeta */
+    flex-direction: column; /* Alinea los elementos en columna */
+    height: 300px; /* Fijar una altura uniforme, reducido a 350px */
+  }
+  
+  .estate-card:hover {
+    transform: scale(1.05); /* Efecto de hover */
+  }
+  
+  .image-container {
+    text-align: center; /* Centra la imagen dentro de su contenedor */
+    margin-bottom: 5px; /* Espacio debajo de la imagen reducido */
+    flex-shrink: 0; /* Evitar que la imagen se reduzca */
+    height: 150px; /* Altura fija para la imagen, reducido a 150px */
+    overflow: hidden; /* Oculta el desbordamiento */
+  }
+  
+  .property-image {
+    width: 100%     ; /* Ajusta al tamaño del contenedor de la imagen */
+    height: 100%; /* Llena el contenedor de imagen */
+    object-fit: cover; /* Mantiene la proporción de la imagen y recorta si es necesario */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  

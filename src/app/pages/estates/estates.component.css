@@ -88,7 +88,6 @@ li p {
   align-items: flex-start; /* Alinear al inicio */
   margin-bottom: 10px; /* Espacio entre cada propiedad */
 }
-
 .photo-gallery {
   display: flex; /* Usar flexbox para alinear elementos en una fila */
   flex-wrap: wrap; /* Permitir que las imágenes se ajusten en varias filas */
@@ -104,58 +103,8 @@ li p {
   max-width: 200px; /* Ajustar el tamaño de las imágenes */
   height: 200px; /* Permitir que la altura se ajuste automáticamente */
   object-fit: cover; /* Asegura que las imágenes se recorten adecuadamente */
+  margin: 40px;
   border-radius: 10%;
-}
-
-/* Estilos para el contenedor sin usuario */
-.no-user-container {
-  text-align: center;
-  padding: 20px;
-  background-color: #f1f1f1; /* Fondo claro */
-  border: 1px solid #ccc; /* Borde sutil */
-  border-radius: 8px; /* Bordes redondeados */
-  margin: 20px; /* Margen alrededor del contenedor */
-}
-
-.no-user-message {
-  font-size: 20px;
-  color: #333; /* Color del texto */
-  margin-bottom: 10px; /* Espaciado inferior */
-}
-
-/* Estilo para los botones de registro y inicio de sesión */
-.register-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff; /* Azul */
-  color: white; /* Texto blanco */
-  border: none;
-  border-radius: 5px;
-  text-decoration: none; /* Sin subrayado */
-  font-size: 16px; /* Tamaño del texto */
-  transition: background 0.3s; /* Transición suave para el hover */
-  margin: 5px; /* Espacio entre botones */
-}
-
-.register-btn:hover {
-  background-color: #0056b3; /* Azul más oscuro en hover */
-}
-
-.upload-btn {
-  display: inline-block;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff; /* Azul */
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-  margin: 5px; /* Espacio entre botones */
-}
-
-.upload-btn:hover {
-  background-color: #0056b3; /* Azul más oscuro */
 }
 
 .delete-image-btn {
@@ -176,6 +125,50 @@ li p {
   background-color: #e53935; /* Rojo más oscuro en hover */
 }
 
-.custom-modal {
-  max-width: 50%; /* Ajusta el ancho del modal según lo necesites */
+.upload-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff; /* Azul */
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  margin: 5px;
+}
+
+.upload-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+}
+
+.no-user-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #f1f1f1; /* Fondo claro */
+  border: 1px solid #ccc; /* Borde sutil */
+  border-radius: 8px; /* Bordes redondeados */
+  margin: 20px; /* Margen alrededor del contenedor */
+}
+
+.no-user-message {
+  font-size: 20px;
+  color: #333; /* Color del texto */
+  margin-bottom: 10px; /* Espaciado inferior */
+}
+
+.register-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Azul */
+  color: white; /* Texto blanco */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none; /* Sin subrayado */
+  font-size: 16px; /* Tamaño del texto */
+  transition: background 0.3s; /* Transición suave para el hover */
+}
+
+.register-btn:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
 }

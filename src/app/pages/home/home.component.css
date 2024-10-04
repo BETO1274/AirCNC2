@@ -139,3 +139,35 @@
   margin-bottom: 10px; /* Espaciado inferior */
   color: #007bff; /* Color azul */
 }
+
+/* Estilo general para el contenedor de búsqueda */
+.search-container {
+  margin-bottom: 20px; /* Espaciado inferior para el contenedor de búsqueda */
+  display: flex; /* Flexbox para alinear elementos */
+  align-items: center; /* Centrar verticalmente */
+}
+
+/* Estilo del h1 */
+h1 {
+  color: #007bff; /* Color azul */
+  text-align: center; /* Centrar texto */
+}
+
+/* Estilo general para el contenedor de propiedades */
+.estates-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas se ajusten a múltiples filas */
+  gap: 10px; /* Espacio entre tarjetas */
+  padding: 10px; /* Espaciado interior */
+}
+
+/* Resto del CSS existente... */
+
+/* Estilo para el ícono de lupa */
+.search-icon {
+  font-size: 1.5em; /* Tamaño del ícono */
+  color: #007bff; /* Color azul */
+  margin-left: 10px; /* Espaciado a la izquierda */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+}

@@ -1,4 +1,10 @@
-<div class="estate" *ngIf="isUserActive; else noUserTemplate"></div>
+
+
+<div class="estate" *ngIf="isUserActive; else noUserTemplate">
+  <h1>Asistente de configuracion </h1>
+
+  <label class="add-property-btn" (click)="addEstate()">¡Agregar Propiedad!</label>
+
 <div *ngIf="estates.length > 0">
   <ul>
     <li *ngFor="let estate of estates">
@@ -31,6 +37,7 @@
 
       </div>
   </ul>
+</div>
 </div>
 
 <ng-template #noUserTemplate>

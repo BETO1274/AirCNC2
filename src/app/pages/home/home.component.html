@@ -1,4 +1,8 @@
-<app-search-bar (search)="handleSearch($event)"></app-search-bar>
+<h1>Asistente de búsqueda</h1>
+<div class="search-container">
+  <app-search-bar (search)="handleSearch($event)"></app-search-bar>
+  <i class="fas fa-search search-icon"></i> <!-- Ícono de lupa -->
+</div>
 <div class="estates-container">
   <div *ngFor="let estate of filteredEstates" class="estate-item">
     <div *ngIf="estate.id !== undefined" class="estate-card">
